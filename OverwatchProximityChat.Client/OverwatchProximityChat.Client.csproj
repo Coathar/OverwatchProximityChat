@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\deafened.png" />
+    <None Remove="Resources\default.png" />
+    <None Remove="Resources\muted.png" />
+    <None Remove="Resources\speaking.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.Net.Client" Version="2.62.0" />
+    <PackageReference Include="NetCoreServer" Version="8.0.7" />
+    <PackageReference Include="SharpHook" Version="5.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OverwatchProximityChat.Shared\OverwatchProximityChat.Shared.csproj" />
+    <ProjectReference Include="..\TeamSpeak.Sdk\TeamSpeak.Sdk.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\deafened.png" />
+    <Resource Include="Resources\default.png" />
+    <Resource Include="Resources\muted.png" />
+    <Resource Include="Resources\speaking.png" />
+  </ItemGroup>
+
+</Project>

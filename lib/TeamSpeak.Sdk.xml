@@ -1,0 +1,3374 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TeamSpeak.Sdk</name>
+    </assembly>
+    <members>
+        <member name="T:TeamSpeak.Sdk.Client.LibraryParameters">
+            <summary>
+            A set of values that are used when initializing the client library  
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.LibraryParameters.TryGetNativeBinaryName(System.String[]@,TeamSpeak.Sdk.SupportedPlatform@)">
+            <summary>
+            Returns the name of the native sdk binary that fits the current environment
+            </summary>
+            <param name="names">possible names of the native sdk binary</param>
+            <param name="platform">detected platform</param>
+            <returns>true if a matching binary exists</returns>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.LibraryParameters.PossibleNativeBinaryLocations">
+            <summary>
+            Possible locations to the TeamSpeak library binary.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.LibraryParameters.Platform">
+            <summary>
+            Determines which platform specific code will be executed.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.LibraryParameters.ResourcesFolder">
+            <summary>
+            Path pointing to the directory where the soundbackends folder is located.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.LibraryParameters.UsedLogTypes">
+            <summary>
+            The library can output log messages (called by <see cref="M:TeamSpeak.Sdk.Client.Library.Log(TeamSpeak.Sdk.LogLevel,System.String,TeamSpeak.Sdk.Client.Connection,System.String)"/>) to a file (located in the logs directory relative to the client executable), to stdout or to user defined callbacks.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.LibraryParameters.LogFileFolder">
+            <summary>
+            Defines the location where the logs are written to. Pass null for the default behavior, which is to use a folder called logs in the current working directory.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.LibraryParameters.ClientPasswordEncrypt">
+            <summary>
+            Used to hash the password in the same way it is hashed in the outside data store. Or just return the password to send the clear text to the server.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.LibraryParameters.CustomPacketEncrypt">
+            <summary>
+            Encrypts outgoing data
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.LibraryParameters.CustomPacketDecrypt">
+            <summary>
+            Decrypts incoming data
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.LibraryParameters.FunctionRarePointers">
+            <summary>
+            Unused by SDK
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.LibraryParameters.#ctor">
+            <summary>
+            Creates a new <see cref="T:TeamSpeak.Sdk.Client.LibraryParameters"/>-Object.
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.LibraryParameters.#ctor(System.String)">
+            <summary>
+            Creates a new ClientLibraryLoadInfo-Object.
+            </summary>
+            <param name="TeamSpeakBinaryFolder">location where the native TeamSpeak sdk files can be found.</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.LibraryParameters.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new <see cref="T:TeamSpeak.Sdk.Client.LibraryParameters"/>-Object.
+            </summary>
+            <param name="teamSpeakBinaryFolder">location where the native TeamSpeak sdk files can be found.</param>
+            <param name="resourcesFolder">Path pointing to the directory where the soundbackends folder is located.</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.LibraryParameters.#ctor(System.String,TeamSpeak.Sdk.SupportedPlatform,System.String)">
+            <summary>
+            Creates a new <see cref="T:TeamSpeak.Sdk.Client.LibraryParameters"/>-Object.
+            </summary>
+            <param name="nativeBinaryLocation">Location to the TeamSpeak library binary.</param>
+            <param name="platform">Determines which platform specific code will be executed.</param>
+            <param name="resourcesFolder">Path pointing to the directory where the soundbackends folder is located.</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ReadonlyChannelCollection">
+            <summary>
+            An immutable collection containing <see cref="T:TeamSpeak.Sdk.Client.Channel"/>
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.ReadonlyChannelCollection.#ctor(System.Collections.Generic.ICollection{TeamSpeak.Sdk.Client.Channel})">
+            <summary>
+            Creates a new <see cref="T:TeamSpeak.Sdk.Client.ReadonlyChannelCollection"/>-Object
+            </summary>
+            <param name="channels">the channels in the new collection</param>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ReadonlyChannelCollection.Item(System.String)">
+            <summary>
+            Returns a <see cref="T:TeamSpeak.Sdk.Client.Channel"/> with the same name
+            </summary>
+            <param name="name">name of the channel</param>
+            <returns>a <see cref="T:TeamSpeak.Sdk.Client.Channel"/> with a matching name</returns>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ReadonlyChannelCollection.Count">
+            <summary>
+            Gets the number of elements actually contained in the <see cref="T:TeamSpeak.Sdk.Client.ReadonlyChannelCollection"/>
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.ReadonlyChannelCollection.Contains(TeamSpeak.Sdk.Client.Channel)">
+            <summary>
+            Determines whether an <see cref="T:TeamSpeak.Sdk.Client.Channel"/> is in the <see cref="T:TeamSpeak.Sdk.Client.ReadonlyChannelCollection"/>
+            </summary>
+            <param name="item">The <see cref="T:TeamSpeak.Sdk.Client.Channel"/> to locate in the <see cref="T:TeamSpeak.Sdk.Client.ReadonlyChannelCollection"/></param>
+            <returns>true if item is found in the <see cref="T:TeamSpeak.Sdk.Client.ReadonlyChannelCollection"/> otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.ReadonlyChannelCollection.CopyTo(TeamSpeak.Sdk.Client.Channel[],System.Int32)">
+            <summary>
+            Copies the entire <see cref="T:TeamSpeak.Sdk.Client.ReadonlyChannelCollection"/> to a compatible one-dimensional array, starting at the beginning of the target array.
+            </summary>
+            <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:TeamSpeak.Sdk.Client.ReadonlyChannelCollection"/>.</param>
+            <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.ReadonlyChannelCollection.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the <see cref="T:TeamSpeak.Sdk.Client.ReadonlyChannelCollection"/>
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> for the <see cref="T:TeamSpeak.Sdk.Client.ReadonlyChannelCollection"/></returns>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ReadonlyChannelCollection.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:TeamSpeak.Sdk.Client.ReadonlyChannelCollection"/> is read-only.
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ConnectStatusChangeEventHandler">
+            <summary>
+            Used after calling <see cref="O:TeamSpeak.Sdk.Client.Connection.Start"/> to inform the <see cref="T:TeamSpeak.Sdk.Client.Client"/> of the connection status changes.
+            </summary>
+            <param name="connection"><see cref="T:TeamSpeak.Sdk.Client.Connection"/> whose status changed</param>
+            <param name="newStatus">the new status of the connection</param>
+            <param name="error">error that resulted in the change in connection status</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ProtocolVersionEventHandler">
+            <summary>
+            Used to report the protocol version while connecting to a server.
+            </summary>
+            <param name="connection">the <see cref="T:TeamSpeak.Sdk.Client.Connection"/></param>
+            <param name="protocolVersion">a <see cref="T:System.Int32"/> representing the version of the protocol</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.NewChannelEventHandler">
+            <summary>
+            Used to inform about the existence of each <see cref="T:TeamSpeak.Sdk.Client.Channel"/>, after connection has been established.
+            </summary>
+            <param name="channel">the <see cref="T:TeamSpeak.Sdk.Client.Channel"/></param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.NewChannelCreatedEventHandler">
+            <summary>
+            Used after a new <see cref="T:TeamSpeak.Sdk.Client.Channel"/> was created.
+            </summary>
+            <param name="channel">the <see cref="T:TeamSpeak.Sdk.Client.Channel"/></param>
+            <param name="invoker"><see cref="T:TeamSpeak.Sdk.Client.Client"/> who created the <see cref="T:TeamSpeak.Sdk.Client.Channel"/></param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ChannelDeletedEventHandler">
+            <summary>
+            Used after <see cref="T:TeamSpeak.Sdk.Client.Channel"/> was deleted.
+            </summary>
+            <param name="channel">the <see cref="T:TeamSpeak.Sdk.Client.Channel"/></param>
+            <param name="invoker"><see cref="T:TeamSpeak.Sdk.Client.Client"/> who deleted the <see cref="T:TeamSpeak.Sdk.Client.Channel"/></param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ChannelMoveEventHandler">
+            <summary>
+            Used when a <see cref="T:TeamSpeak.Sdk.Client.Channel"/> is being moved.
+            </summary>
+            <param name="channel">the <see cref="T:TeamSpeak.Sdk.Client.Channel"/></param>
+            <param name="invoker"><see cref="T:TeamSpeak.Sdk.Client.Client"/> who moved the <see cref="T:TeamSpeak.Sdk.Client.Channel"/></param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ChannelChangedEventHandler">
+            <summary>
+            Used when a <see cref="T:TeamSpeak.Sdk.Client.Channel"/> was changed
+            </summary>
+            <param name="channel">the <see cref="T:TeamSpeak.Sdk.Client.Channel"/></param>
+            <param name="invoker"><see cref="T:TeamSpeak.Sdk.Client.Client"/> who changed the <see cref="T:TeamSpeak.Sdk.Client.Channel"/></param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.UpdateClientEventHandler">
+            <summary>
+            Used when a <see cref="T:TeamSpeak.Sdk.Client.Client"/> was changed
+            </summary>
+            <param name="client">the <see cref="T:TeamSpeak.Sdk.Client.Client"/></param>
+            <param name="invoker">the <see cref="T:TeamSpeak.Sdk.Client.Client"/> who did the changes</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ClientMoveEventHandler">
+            <summary>
+            Used when a <see cref="T:TeamSpeak.Sdk.Client.Client"/> is actively switching to a <see cref="T:TeamSpeak.Sdk.Client.Channel"/>.
+            </summary>
+            <param name="client">the <see cref="T:TeamSpeak.Sdk.Client.Client"/></param>
+            <param name="oldChannel"><see cref="T:TeamSpeak.Sdk.Client.Channel"/> from the <see cref="T:TeamSpeak.Sdk.Client.Client"/> came from</param>
+            <param name="newChannel"><see cref="T:TeamSpeak.Sdk.Client.Channel"/> where the <see cref="T:TeamSpeak.Sdk.Client.Client"/> is going to</param>
+            <param name="visibility">visibility of the <see cref="T:TeamSpeak.Sdk.Client.Client"/></param>
+            <param name="invoker">the <see cref="T:TeamSpeak.Sdk.Client.Client"/> who initiated the move</param>
+            <param name="message">optional message</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ClientMoveSubscriptionEventHandler">
+            <summary>
+            Used when a <see cref="T:TeamSpeak.Sdk.Client.Client"/> becomes visible to the current connection.
+            </summary>
+            <param name="client">the <see cref="T:TeamSpeak.Sdk.Client.Client"/></param>
+            <param name="oldChannel"><see cref="T:TeamSpeak.Sdk.Client.Channel"/> from where the <see cref="T:TeamSpeak.Sdk.Client.Client"/> came from</param>
+            <param name="newChannel"><see cref="T:TeamSpeak.Sdk.Client.Channel"/> </param>
+            <param name="visibility"></param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ClientMoveTimeoutEventHandler">
+            <summary>
+            Used when a <see cref="T:TeamSpeak.Sdk.Client.Client"/>s is used because he timed out
+            </summary>
+            <param name="client">the <see cref="T:TeamSpeak.Sdk.Client.Client"/></param>
+            <param name="oldChannel"><see cref="T:TeamSpeak.Sdk.Client.Channel"/> from the <see cref="T:TeamSpeak.Sdk.Client.Client"/> came from</param>
+            <param name="newChannel"><see cref="T:TeamSpeak.Sdk.Client.Channel"/> where the <see cref="T:TeamSpeak.Sdk.Client.Client"/> is going to</param>
+            <param name="visibility">visibility of the <see cref="T:TeamSpeak.Sdk.Client.Client"/></param>
+            <param name="message">optional message</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ClientKickFromChannelEventHandler">
+            <summary>
+            Used when a <see cref="T:TeamSpeak.Sdk.Client.Client"/> is kicked from a <see cref="T:TeamSpeak.Sdk.Client.Channel"/>
+            </summary>
+            <param name="client">the <see cref="T:TeamSpeak.Sdk.Client.Client"/></param>
+            <param name="oldChannel"><see cref="T:TeamSpeak.Sdk.Client.Channel"/> from the <see cref="T:TeamSpeak.Sdk.Client.Client"/> came from</param>
+            <param name="newChannel"><see cref="T:TeamSpeak.Sdk.Client.Channel"/> where the <see cref="T:TeamSpeak.Sdk.Client.Client"/> is going to</param>
+            <param name="visibility">visibility of the <see cref="T:TeamSpeak.Sdk.Client.Client"/></param>
+            <param name="invoker">the <see cref="T:TeamSpeak.Sdk.Client.Client"/> who initiated the kick</param>
+            <param name="message">optional message</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ClientKickFromServerEventHandler">
+            <summary>
+            Used When a <see cref="T:TeamSpeak.Sdk.Client.Client"/> is kicked from the server
+            </summary>
+            <param name="client">the <see cref="T:TeamSpeak.Sdk.Client.Client"/></param>
+            <param name="oldChannel"><see cref="T:TeamSpeak.Sdk.Client.Channel"/> from the <see cref="T:TeamSpeak.Sdk.Client.Client"/> came from</param>
+            <param name="newChannel"><see cref="T:TeamSpeak.Sdk.Client.Channel"/> where the <see cref="T:TeamSpeak.Sdk.Client.Client"/> is going to</param>
+            <param name="visibility">visibility of the <see cref="T:TeamSpeak.Sdk.Client.Client"/></param>
+            <param name="invoker">the <see cref="T:TeamSpeak.Sdk.Client.Client"/> who initiated the kick</param>
+            <param name="message">optional message</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ServerUpdatedEventHandler">
+            <summary>
+            Used when the virtual server was changed
+            </summary>
+            <param name="connection">the connection</param>
+            <param name="editor">the <see cref="T:TeamSpeak.Sdk.Client.Client"/> who changed the server</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ServerErrorEventHandler">
+            <summary>
+            Error codes sent by the server to the <see cref="T:TeamSpeak.Sdk.Client.Client"/>
+            </summary>
+            <param name="connection">the connection</param>
+            <param name="error">the error code</param>
+            <param name="returnCode">optional return code</param>
+            <param name="extraMessage">additional message send by the server</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ServerStopEventHandler">
+            <summary>
+            Used when a server shutdown has been received
+            </summary>
+            <param name="connection">the connection</param>
+            <param name="message">optional message</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ServerMessageEventHandler">
+            <summary>
+            Used when a server message was received
+            </summary>
+            <param name="client">the <see cref="T:TeamSpeak.Sdk.Client.Client"/> that send the message</param>
+            <param name="message">the message</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ChannelMessageEventHandler">
+            <summary>
+            Used when a channel message was received
+            </summary>
+            <param name="client">the <see cref="T:TeamSpeak.Sdk.Client.Client"/> that send the message</param>
+            <param name="message">the message</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ClientMessageEventHandler">
+            <summary>
+            Used when a private text message was received
+            </summary>
+            <param name="from">the <see cref="T:TeamSpeak.Sdk.Client.Client"/> that send the message</param>
+            <param name="to">the <see cref="T:TeamSpeak.Sdk.Client.Client"/> that receives the message</param>
+            <param name="message">the message</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.TalkStatusChangeEventHandler">
+            <summary>
+            Used when a <see cref="T:TeamSpeak.Sdk.Client.Client"/> starts or stops talking
+            </summary>
+            <param name="client">the <see cref="T:TeamSpeak.Sdk.Client.Client"/> whose talk status changed</param>
+            <param name="status">the new <see cref="T:TeamSpeak.Sdk.TalkStatus"/></param>
+            <param name="isReceivedWhisper">true if the event was caused by private whispering; otherwise false</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.IgnoredWhisperEventHandler">
+            <summary>
+            Used when whisper is received from a <see cref="T:TeamSpeak.Sdk.Client.Client"/> that has not yet been added to the <see cref="T:TeamSpeak.Sdk.Client.Client"/> allow list.
+            </summary>
+            <param name="client">the <see cref="T:TeamSpeak.Sdk.Client.Client"/> that is whispering</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ChannelSubscribeEventHandler">
+            <summary>
+            Used when <see cref="T:TeamSpeak.Sdk.Client.Channel"/> has been subscribed
+            </summary>
+            <param name="channel">the newly subscribed <see cref="T:TeamSpeak.Sdk.Client.Channel"/></param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ChannelSubscribeFinishedEventHandler">
+            <summary>
+            Used to marks the end of multiple calls to <see cref="E:TeamSpeak.Sdk.Client.Connection.ChannelSubscribed"/> 
+            </summary>
+            <param name="connection">the connection</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ChannelUnsubscribeEventHandler">
+            <summary>
+            Called when <see cref="T:TeamSpeak.Sdk.Client.Channel"/> has been unsubscribed
+            </summary>
+            <param name="channel">the newly unsubscribed <see cref="T:TeamSpeak.Sdk.Client.Channel"/></param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ChannelUnsubscribeFinishedEventHandler">
+            <summary>
+            Used to mark the end of multiple calls to <see cref="E:TeamSpeak.Sdk.Client.Connection.ChannelUnsubscribed"/> 
+            </summary>
+            <param name="connection">ServerConnection connection</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ChannelDescriptionUpdateEventHandler">
+            <summary>
+            Used when the <see cref="P:TeamSpeak.Sdk.Client.Channel.Description"/> was edited
+            </summary>
+            <param name="channel">the <see cref="T:TeamSpeak.Sdk.Client.Channel"/></param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ChannelPasswordChangedEventHandler">
+            <summary>
+            Used when a <see cref="P:TeamSpeak.Sdk.Client.Channel.Password"/> was modified.
+            </summary>
+            <param name="channel">the <see cref="T:TeamSpeak.Sdk.Client.Channel"/></param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.PlaybackShutdownCompleteEventHandler">
+            <summary>
+            Called after <see cref="M:TeamSpeak.Sdk.Client.Connection.InitiateGracefulPlaybackShutdown"/> finished for a device
+            </summary>
+            <param name="connection">the <see cref="T:TeamSpeak.Sdk.Client.Connection"/></param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.SoundDeviceListChangedEventHandler">
+            <summary>
+            Called when the list of <see cref="T:TeamSpeak.Sdk.Client.SoundDevice"/> returned by <see cref="M:TeamSpeak.Sdk.Client.Library.GetCaptureDevices(System.String)"/> and <see cref="M:TeamSpeak.Sdk.Client.Library.GetPlaybackDevices(System.String)"/> was changed
+            </summary>
+            <param name="mode">The soundbackend affected</param>
+            <param name="playOrCap">true if the list of playback devices is changed; otherwise the list of capture devices is changed</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.EditPlaybackVoiceDataEventHandler">
+            <summary>
+            Used when a incoming voice packet from a remote <see cref="T:TeamSpeak.Sdk.Client.Client"/> was decoded and is about to be played
+            </summary>
+            <param name="client">the <see cref="T:TeamSpeak.Sdk.Client.Client"/> whose sound data is about to be played</param>
+            <param name="samples">a <see cref="T:System.Array"/> containing the sound date</param>
+            <param name="channels">the number of channels in the sound data</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.EditPostProcessVoiceDataEventHandler">
+            <summary>
+            Used when a incoming voice packet from a remote <see cref="T:TeamSpeak.Sdk.Client.Client"/> was decoded and 3D positioned.
+            </summary>
+            <param name="client">the <see cref="T:TeamSpeak.Sdk.Client.Client"/> whose sound data is about to be played</param>
+            <param name="samples">a <see cref="T:System.Array"/> containing the sound date</param>
+            <param name="channels">the number of channels in the sound data</param>
+            <param name="channelSpeakers">a <see cref="T:System.Array"/> that maps sound channels to speakers</param>
+            <param name="channelFillMask">a bit-mask of <see cref="T:TeamSpeak.Sdk.Speakers"/> that defines which channels are filled. For efficiency reasons, not all channels need to have actual sound data in it. So before this data is used, use this bit-mask to check if the channel is actually filled. If you decide to add data to a channel that is empty, set the bit for this channel in this mask.</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.EditMixedPlaybackVoiceDataEventHandler">
+            <summary>
+            Used when all sounds that are about to be played back for this <see cref="T:TeamSpeak.Sdk.Client.Connection"/> have been mixed. This is the last chance to alter/get sound.
+            </summary>
+            <param name="connection">the <see cref="T:TeamSpeak.Sdk.Client.Connection"/></param>
+            <param name="samples">a <see cref="T:System.Array"/> containing the sound date</param>
+            <param name="channels">the number of channels in the sound data</param>
+            <param name="channelSpeakers">a <see cref="T:System.Array"/> that maps sound channels to speakers</param>
+            <param name="channelFillMask">a bit-mask of <see cref="T:TeamSpeak.Sdk.Speakers"/> that defines which channels are filled. For efficiency reasons, not all channels need to have actual sound data in it. So before this data is used, use this bit-mask to check if the channel is actually filled. If you decide to add data to a channel that is empty, set the bit for this channel in this mask.</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.EditCapturedVoiceDataEventHandler">
+            <summary>
+            Used after sound is recorded from the sound device and is preprocessed. 
+            </summary>
+            <param name="connection">the <see cref="T:TeamSpeak.Sdk.Client.Connection"/></param>
+            <param name="samples">a <see cref="T:System.Array"/> containing the sound date</param>
+            <param name="channels">the number of channels in the sound data</param>
+            <param name="edited">true if the sound data was changed by the event-handler; otherwise false</param>
+            <param name="cancel">true if the sound data should be discarded; otherwise false</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.Custom3dRolloffCalculationClientEventHandler">
+            <summary>
+            Used to calculate volume attenuation for distance in 3D positioning of a <see cref="T:TeamSpeak.Sdk.Client.Client"/>.
+            </summary>
+            <param name="client">the <see cref="T:TeamSpeak.Sdk.Client.Client"/></param>
+            <param name="distance">The distance between the listener and the client.</param>
+            <param name="volume">The volume which the Client Lib calculated.</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.Custom3dRolloffCalculationWaveEventHandler">
+            <summary>
+            Used to calculate volume attenuation for distance in 3D positioning of a wave file.
+            </summary>
+            <param name="wave">the <see cref="T:TeamSpeak.Sdk.Client.WaveHandle"/> for the playing wave file, returned by <see cref="M:TeamSpeak.Sdk.Client.Connection.PlayWaveFile(System.String,System.Boolean)"/>.</param>
+            <param name="distance">The distance between the listener and the client.</param>
+            <param name="volume">The volume which the Client Lib calculated.</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.UserLoggingMessageEventHandler">
+            <summary>
+            Used for user customizable logging and handling
+            </summary>
+            <param name="message">Actual log message text.</param>
+            <param name="level">Severity of log message, defined by the <see cref="T:TeamSpeak.Sdk.LogLevel"/>. Note that only log messages of a level higher or equal to than the one configured in <see cref="P:TeamSpeak.Sdk.Client.Library.LogLevel"/> will appear.</param>
+            <param name="channel">Optional custom text to categorize the message channel.</param>
+            <param name="connection">the <see cref="T:TeamSpeak.Sdk.Client.Connection"/></param>
+            <param name="time">Date and time when the log message occurred.</param>
+            <param name="completeString">A verbose log message including all other parameters for convenience.</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.CustomPacketEncryptHandler">
+            <summary>
+            Encrypts outgoing data
+            </summary>
+            <param name="dataToSend">An array with the outgoing data to be encrypted. Apply your custom encryption to the data array. If the encrypted data is smaller than sizeOfData, write your encrypted data into the existing memory of dataToSend. If your encrypted data is larger, you need to allocate memory and change dataToSend. You need to take care of freeing your own allocated memory yourself. The memory allocated by the SDK, to which dataToSend is originally pointing to, must not be freed.</param>
+            <param name="sizeOfData">The size of the data array.</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.CustomPacketDecryptHandler">
+            <summary>
+            Decrypts incoming data
+            </summary>
+            <param name="dataReceived">An array with the received data to be decrypted. Apply your custom decryption to the data array.If the decrypted data is smaller than dataReceivedSize, write your decrypted data into the existing memory of dataReceived. If your decrypted data is larger, you need to allocate memory and change dataReceived. You need to take care of freeing your own allocated memory yourself. The memory allocated by the SDK, to which dataReceived is originally pointing to, must not be freed.</param>
+            <param name="dataReceivedSize">The size of the data array.</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.CheckServerUniqueIdentifierEventHandler">
+            <summary>
+            Used to check if the unique identifier is the correct one
+            </summary>
+            <param name="connection">the <see cref="T:TeamSpeak.Sdk.Client.Connection"/></param>
+            <param name="serverUniqueIdentifier">UniqueIdentifier of the server</param>
+            <param name="cancelConnect">true if the connection process should be aborted; otherwise false</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ClientPasswordEncryptHandler">
+            <summary>
+            Used to hash the password in the same way it is hashed in the outside data store.
+            </summary>
+            <param name="connection">the <see cref="T:TeamSpeak.Sdk.Client.Connection"/> the password is being send to</param>
+            <param name="plaintext">The plaintext password.</param>
+            <param name="maxEncryptedTextByteSize">that maximum size of encrypted plaintext password.</param>
+            <returns>the custom encrypted password. The string encoded in utf8 most not be larger then maxEncryptedTextByteSize</returns>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.FileTransferStatusEventHandler">
+            <summary>
+            Used when a file finished being transfered.
+            </summary>
+            <param name="transfer">the <see cref="T:TeamSpeak.Sdk.Client.FileTransfer"/> that represents the finished transfer</param>
+            <param name="status">the result of the transfer</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.FileInfoEventHandler">
+            <summary>
+            Used to return the reply of the server for <see cref="M:TeamSpeak.Sdk.Client.Channel.GetFileInfo(System.String,System.String)"/>
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.FileInfo">
+            <summary>
+            Information about a file or directory stored on a TeamSpeak server
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileInfo.Channel">
+            <summary>
+            <see cref="P:TeamSpeak.Sdk.Client.FileInfo.Channel"/> for which a <see cref="T:TeamSpeak.Sdk.Client.FileInfo"/> was requested.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileInfo.Path">
+            <summary>
+            Subdirectory inside the channel for which the FileInfo was requested. “/” indicates the root directory is listed.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileInfo.Name">
+            <summary>
+            File name.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileInfo.Size">
+            <summary>
+            File size,
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileInfo.LastModified">
+            <summary>
+            The date and time on which the file was last modified.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileInfo.Type">
+            <summary>
+            Indicates if this entry is a directory or a file. 
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileInfo.IncompleteSize">
+            <summary>
+            If the file is currently still being transferred, this indicates the currently transferred file size.
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.FileInfo.#ctor(TeamSpeak.Sdk.Client.Channel,System.String,System.String,System.UInt64,System.DateTimeOffset,TeamSpeak.Sdk.FileListType,System.UInt64)">
+            <summary>
+            Creates a <see cref="T:TeamSpeak.Sdk.Client.FileInfo"/>-Object
+            </summary>
+            <param name="channel"><see cref="P:TeamSpeak.Sdk.Client.FileInfo.Channel"/> for which a <see cref="T:TeamSpeak.Sdk.Client.FileInfo"/> was requested.</param>
+            <param name="path">Subdirectory inside the channel for which the FileInfo was requested. “/” indicates the root directory is listed.</param>
+            <param name="name">File name.</param>
+            <param name="size">File size.</param>
+            <param name="lastModified">The date and time on which the file was last modified.</param>
+            <param name="type">Indicates if this entry is a directory or a file. </param>
+            <param name="incompleteSize"> If the file is currently still being transferred, this indicates the currently transferred file size.</param>
+        </member>
+        <member name="F:TeamSpeak.Sdk.Client.NativeEvents.DelegateReferences">
+            <summary>
+            This list ensures that the native event handlers are not garbage collected
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ISoundDevice">
+            <summary>
+            A device that can either playback or capture sound.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ISoundDevice.ID">
+            <summary>
+            ID of the device.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ISoundDevice.Mode">
+            <summary>
+            The soundbackend.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ISoundDevice.Name">
+            <summary>
+            Human-readable name of the device.
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.SoundDevice">
+            <summary>
+            A device that can either playback or capture sound
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.SoundDevice.ID">
+            <summary>
+            ID of the device.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.SoundDevice.Mode">
+            <summary>
+            The soundbackend.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.SoundDevice.Name">
+            <summary>
+            Human-readable name of the device.
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.SoundDevice.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Creates a new <see cref="T:TeamSpeak.Sdk.Client.SoundDevice"/>
+            </summary>
+            <param name="mode">the soundbackend</param>
+            <param name="id">id of the device</param>
+            <param name="name">human-readable name</param>
+            <remarks>To get available SoundDevices use <see cref="M:TeamSpeak.Sdk.Client.Library.GetPlaybackDevices(System.String)"/> and <see cref="M:TeamSpeak.Sdk.Client.Library.GetCaptureDevices(System.String)"/></remarks>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.SoundDevice.op_Equality(TeamSpeak.Sdk.Client.SoundDevice,TeamSpeak.Sdk.Client.SoundDevice)">
+            <summary>
+            Compares two <see cref="T:TeamSpeak.Sdk.Client.SoundDevice"/> structures for equality. 
+            </summary>
+            <param name="a">The first <see cref="T:TeamSpeak.Sdk.Client.SoundDevice"/> structure to compare.</param>
+            <param name="b">The second <see cref="T:TeamSpeak.Sdk.Client.SoundDevice"/> structure to compare.</param>
+            <returns>true if the ID and Mode of a and b are equal; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.SoundDevice.op_Inequality(TeamSpeak.Sdk.Client.SoundDevice,TeamSpeak.Sdk.Client.SoundDevice)">
+            <summary>
+            Compares two <see cref="T:TeamSpeak.Sdk.Client.SoundDevice"/> structures for inequality. 
+            </summary>
+            <param name="a">The first <see cref="T:TeamSpeak.Sdk.Client.SoundDevice"/> structure to compare.</param>
+            <param name="b">The second <see cref="T:TeamSpeak.Sdk.Client.SoundDevice"/> structure to compare.</param>
+            <returns>true if the ID and Mode of a and b are different; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.SoundDevice.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal.
+            </summary>
+            <param name="obj">Another object to compare to.</param>
+            <returns>true if obj and this instance are the same type and represent the same value; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.SoundDevice.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.SoundDevice.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>A string that represents the current object.</returns>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.CustomDevice">
+            <summary>
+            A custom device usable for playback and/or capture
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.CustomDevice.ID">
+            <summary>
+            ID of the device.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.CustomDevice.Mode">
+            <summary>
+            The soundbackend.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.CustomDevice.Name">
+            <summary>
+            Human-readable name of the device.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.CustomDevice.CaptureRate">
+            <summary>
+            Frequency of the capture device.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.CustomDevice.CaptureChannels">
+            <summary>
+            Number of channels of the capture device.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.CustomDevice.PlaybackRate">
+            <summary>
+            Frequency of the playback device.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.CustomDevice.PlaybackChannels">
+            <summary>
+            Number of channels of the playback device.
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.CustomDevice.#ctor(System.String,TeamSpeak.Sdk.SamplingRate,System.Int32,TeamSpeak.Sdk.SamplingRate,System.Int32)">
+            <summary>
+            Creates a new CustomDevice
+            </summary>
+            <param name="name">human-readable name</param>
+            <param name="captureRate">sampling rate of the capture</param>
+            <param name="captureChannels">amount of channels to capture, can be 1 or 2</param>
+            <param name="playbackRate">sampling rate of the playback</param>
+            <param name="playbackChannels">amount of channels of the playback, can be 1 or 2</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.CustomDevice.AcquireData(System.Int16[],System.Int32)">
+            <summary>
+            Retrieve playback data from the Library
+            </summary>
+            <param name="buffer">Buffer containing the playback data retrieved from the Library.</param>
+            <param name="samples">The number of samples to acquire</param>
+            <returns>true if playback data is available; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.CustomDevice.ProcessData(System.Int16[],System.Int32)">
+            <summary>
+            Send the samples from your device to the Library
+            </summary>
+            <param name="buffer">sample buffer containing the data to be send</param>
+            <param name="samples">The number of samples to send</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.CustomDevice.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>A string that represents the current object.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.CustomDevice.Dispose">
+            <summary>
+            Releases all resources used.
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.CustomDevice.Finalize">
+            <summary>
+            Allows CustomDevice to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection.
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.CustomDevice.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the CustomDevice and optionally releases the managed resources.
+            </summary>
+            <param name="disposed">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.Channel">
+            <summary>
+            Represents a Channel on a TeamSpeak-Server
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.ID">
+            <summary>
+            ID of the channel
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.Connection">
+            <summary>
+            Server Connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.Parent">
+            <summary>
+            The parent channel
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.Clients">
+            <summary>
+            List of all clients in the channel, if the channel is currently subscribed.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.Channels">
+            <summary>
+            List of all subchannels in the channel
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.#ctor(TeamSpeak.Sdk.Client.Connection,System.UInt64)">
+            <summary>
+            Creates a new Channel-Object.
+            </summary>
+            <remarks>does not create a new channel on the server. To create a new channel use <see cref="M:TeamSpeak.Sdk.Client.Connection.CreateChannel(System.String,TeamSpeak.Sdk.Client.Channel,System.String,System.String,System.String,TeamSpeak.Sdk.Client.Channel,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{TeamSpeak.Sdk.CodecType},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Int32})"/></remarks>
+            <param name="connection">the server connection</param>
+            <param name="id">ID of the channel</param>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.Name">
+            <summary>
+            Name of the channel
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.Topic">
+            <summary>
+            Single-line channel topic
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.Description">
+            <summary>
+            Optional channel description. Can have multiple lines. Needs to be request with <see cref="M:TeamSpeak.Sdk.Client.Channel.GetChannelDescription"/>.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.Password">
+            <summary>
+            Optional password for password-protected channels.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.Codec">
+            <summary>
+            Codec used for this channel
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.CodecQuality">
+            <summary>
+            Quality of channel codec of this channel. Valid values range from 0 to 10, default is 7. Higher values result in better speech quality but more bandwidth usage
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.MaxClients">
+            <summary>
+            Number of maximum clients who can join this channel
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.MaxFamilyClients">
+            <summary>
+            Number of maximum clients who can join this channel and all subchannels
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.Order">
+            <summary>
+            <see cref="P:TeamSpeak.Sdk.Client.Channel.Order"/> is the <see cref="T:TeamSpeak.Sdk.Client.Channel"/> after which this channel is sorted. <see langword="null"/> meaning its going to be the first <see cref="T:TeamSpeak.Sdk.Client.Channel"/> under <see cref="P:TeamSpeak.Sdk.Client.Channel.Parent"/>
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.IsPermanent">
+            <summary>
+            Permanent channels will be restored when the server restarts.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.IsSemiPermanent">
+            <summary>
+            Semi-permanent channels are not automatically deleted when the last user left but will not be restored when the server restarts.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.IsDefault">
+            <summary>
+            Channel is the default channel. There can only be one default channel per server. New users who did not configure a channel to join on login in ts3client_startConnection will automatically join the default channel.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.IsPasswordProtected">
+            <summary>
+            If set, channel is password protected. The password itself is stored in ChannelPassword
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.CodecLatencyFactor">
+            <summary>
+            Latency of this channel.
+            </summary>
+            <remarks>
+            Allows to increase the packet size resulting in less bandwidth usage at the cost of higher latency. A value of 1 (default) is the best setting for lowest latency and best quality. If bandwidth or network quality are restricted, increasing the latency factor can help stabilize the connection. Higher latency values are only possible for low-quality codec and codec quality settings.
+            </remarks>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.CodecIsUnencrypted">
+            <summary>
+            If true, this channel is not using encrypted voice data. If false, voice data is encrypted for this channel.
+            </summary>
+            <remarks>
+            Note that channel voice data encryption can be globally disabled or enabled for the virtual server. Changing this flag makes only sense if global voice data encryption is set to be configured per channel.
+            </remarks>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.DeleteDelay">
+            <summary>
+            This parameter defines how many seconds the server waits until a temporary channel is deleted when empty.
+            When a temporary channel is created, a timer is started. If a user joins the channel before the countdown is finished, the channel is not deleted. After the last person has left the channel, the countdown starts again. DeleteDelay defines the length of this countdown in seconds.
+            The time since the last client has left the temporary channel can be queried with ts3client_getChannelEmptySecs.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Channel.ChannelEmptyTime">
+            <summary>
+            Time since the last client has left a temporary channel
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.SendFile(System.String,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Uploads a local file to the server
+            </summary>
+            <param name="file">Path of the local file, which is to be uploaded.</param>
+            <param name="overwrite">when false, upload will abort if remote file exists</param>
+            <param name="resume">If we have a previously halted transfer: true = resume, false = restart transfer</param>
+            <param name="channelPassword">Optional channel password. Pass empty string or null if unused.</param>
+            <returns>A task that represents the asynchronous upload operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.SendFile(System.String,System.String,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Uploads a local file to the server
+            </summary>
+            <param name="sourceDirectory">Local directory where the file to upload is located.</param>
+            <param name="fileName">Filename of the local file, which is to be uploaded.</param>
+            <param name="overwrite">when false, upload will abort if remote file exists</param>
+            <param name="resume">If we have a previously halted transfer: true = resume, false = restart transfer</param>
+            <param name="channelPassword">Optional channel password. Pass empty string or null if unused.</param>
+            <returns>A task that represents the asynchronous upload operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.SendFile(System.String,System.String,System.Boolean,System.Boolean,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Uploads a local file to the server
+            </summary>
+            <param name="sourceDirectory">Local directory where the file to upload is located.</param>
+            <param name="fileName">Filename of the local file, which is to be uploaded.</param>
+            <param name="overwrite">when false, upload will abort if remote file exists</param>
+            <param name="resume">If we have a previously halted transfer: true = resume, false = restart transfer</param>
+            <param name="channelPassword">Optional channel password. Pass empty string or null if unused.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None"/></param>
+            <returns>A task that represents the asynchronous upload operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.SendFile(System.String,System.String,System.Boolean,System.Boolean,System.String,System.String)">
+            <summary>
+            Request uploading a local file to the server
+            </summary>
+            <param name="sourceDirectory">Local directory where the file to upload is located.</param>
+            <param name="fileName">Filename of the local file, which is to be uploaded.</param>
+            <param name="overwrite">when false, upload will abort if remote file exists</param>
+            <param name="resume">If we have a previously halted transfer: true = resume, false = restart transfer</param>
+            <param name="channelPassword">Optional channel password. Pass empty string or null if unused.</param>
+            <param name="returnCode">a custom string. The <see cref="E:TeamSpeak.Sdk.Client.Connection.ServerError"/>-Event will receive the same custom string in its returnCode parameter. If no error occurred, <see cref="E:TeamSpeak.Sdk.Client.Connection.ServerError"/> will indicate success by passing <see cref="F:TeamSpeak.Sdk.Error.Ok"/>.</param>
+            <returns>A FileTransfer that represents the asynchronous upload operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.RequestFile(System.String,System.String,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Download a file from the server.
+            </summary>
+            <param name="fileName">Filename of the remote file, which is to be downloaded.</param>
+            <param name="destinationDirectory">Local target directory name where the download file should be saved.</param>
+            <param name="overwrite">when false, download will abort if local file exists</param>
+            <param name="resume">If we have a previously halted transfer: true = resume, false = restart transfer</param>
+            <param name="channelPassword">Optional channel password. Pass empty string or null if unused.</param>
+            <returns>A task that represents the asynchronous download operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.RequestFile(System.String,System.String,System.Boolean,System.Boolean,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Download a file from the server.
+            </summary>
+            <param name="fileName">Filename of the remote file, which is to be downloaded.</param>
+            <param name="destinationDirectory">Local target directory name where the download file should be saved.</param>
+            <param name="overwrite">when false, download will abort if local file exists</param>
+            <param name="resume">If we have a previously halted transfer: true = resume, false = restart transfer</param>
+            <param name="channelPassword">Optional channel password. Pass empty string or null if unused.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None"/></param>
+            <returns>A task that represents the asynchronous download operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.RequestFile(System.String,System.String,System.Boolean,System.Boolean,System.String,System.String)">
+            <summary>
+            Request downloading a file from the server.
+            </summary>
+            <param name="fileName">Filename of the remote file, which is to be downloaded.</param>
+            <param name="destinationDirectory">Local target directory name where the download file should be saved.</param>
+            <param name="overwrite">when false, download will abort if local file exists</param>
+            <param name="resume">If we have a previously halted transfer: true = resume, false = restart transfer</param>
+            <param name="channelPassword">Optional channel password. Pass empty string or null if unused.</param>
+            <param name="returnCode">a custom string. The <see cref="E:TeamSpeak.Sdk.Client.Connection.ServerError"/>-Event will receive the same custom string in its returnCode parameter. If no error occurred, <see cref="E:TeamSpeak.Sdk.Client.Connection.ServerError"/> will indicate success by passing <see cref="F:TeamSpeak.Sdk.Error.Ok"/>.</param>
+            <returns>A FileTransfer that represents the asynchronous download operation.</returns>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.Channel.TransferMethod">
+            <summary>
+            Implementation for both upload and download. Since both APIs need a thick wrapper, and are nearly identically => the code was merged.
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.GetFileList(System.String,System.String)">
+            <summary>
+            Query list of files in a directory.
+            </summary>
+            <param name="path">Path inside the channel, defining the subdirectory. Top level path is “/”</param>
+            <param name="channelPassword">Optional channel password. Pass empty string or null if unused.</param>
+            <returns>A task that returns the list of files contained in path</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.GetFileInfo(System.String,System.String)">
+            <summary>
+            Query information of a specified file. The answer from the server will trigger <see cref="E:TeamSpeak.Sdk.Client.Connection.FileInfoReceived"/> with the requested information.
+            </summary>
+            <param name="file">File name we want to request info from, needs to include the full path within the channel, e.g. “/file” for a top-level file or “/dir1/dir2/file” for a file located in a subdirectory.</param>
+            <param name="channelPassword">Optional channel password. Pass empty string or null if unused.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.CreateDirectory(System.String,System.String)">
+            <summary>
+            Create a directory.
+            </summary>
+            <param name="directoryPath">Name of the directory to create. The directory name needs to include the full path within the channel, e.g. “/file” for a top-level file or “/dir1/dir2/file” for a file located in a subdirectory.</param>
+            <param name="channelPassword">Optional channel password. Pass empty string or null if unused.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.MoveFile(System.String,System.String,System.String)">
+            <summary>
+            Moves or renames a file. If the source and target paths are the same, the file will simply be renamed.
+            </summary>
+            <param name="file">Old name of the file. The file name needs to include the full path within the channel, e.g. “/file” for a top-level file or “/dir1/dir2/file” for a file located in a subdirectory.</param>
+            <param name="toFile">New name of the file. The new name needs to include the full path within the channel, e.g. “/file” for a top-level file or “/dir1/dir2/file” for a file located in a subdirectory.</param>
+            <param name="channelPassword">Optional channel password. Pass empty string or null if unused.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.MoveFile(System.String,TeamSpeak.Sdk.Client.Channel,System.String,System.String,System.String)">
+            <summary>
+            Moves or renames a file. If the source and target channels and paths are the same, the file will simply be renamed.
+            </summary>
+            <param name="file">Old name of the file. The file name needs to include the full path within the channel, e.g. “/file” for a top-level file or “/dir1/dir2/file” for a file located in a subdirectory.</param>
+            <param name="channelPassword">Optional channel password. Pass empty string or null if unused.</param>
+            <param name="toFile">New name of the file. The new name needs to include the full path within the channel, e.g. “/file” for a top-level file or “/dir1/dir2/file” for a file located in a subdirectory.</param>
+            <param name="toChannel">Target channel, to which we want to move the file.</param>
+            <param name="toChannelPassword">Optional channel password. Pass empty string or null if unused.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.DeleteFile(System.String,System.String)">
+            <summary>
+            Deleting a remote files on the server
+            </summary>
+            <param name="file">File we request to be deleted. The file name needs to include the full path within the channel, e.g. “/file” for a top-level file or “/dir1/dir2/file” for a file located in a subdirectory.</param>
+            <param name="channelPassword">Optional channel password. Pass empty string or null if unused.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.DeleteFile(System.String[],System.String)">
+            <summary>
+            Delete one or more remote files on the server.
+            </summary>
+            <param name="files">List of files we request to be deleted. The file names need to include the full path within the channel, e.g. “/file” for a top-level file or “/dir1/dir2/file” for a file located in a subdirectory.</param>
+            <param name="channelPassword">Optional channel password. Pass empty string or null if unused.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.GetChannelDescription">
+            <summary>
+            Request updating the channel description 
+            </summary>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.Delete(System.Boolean)">
+            <summary>
+            Removes the channel from the server
+            </summary>
+            <param name="force">If true, the channel will be deleted even when it is not empty. Clients within the deleted channel are transfered to the default channel. Any contained subchannels are removed as well. If false, the server will refuse to delete a channel that is not empty.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.SendTextMessage(System.String)">
+            <summary>
+            Send a text message to the channel
+            </summary>
+            <param name="message">The text message</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.MoveTo(TeamSpeak.Sdk.Client.Channel,TeamSpeak.Sdk.Client.Channel)">
+            <summary>
+            Move the channel to a new parent channel
+            </summary>
+            <param name="newParent">The parent channel where the moved channel is to be inserted as child. Use null to insert as top-level channel.</param>
+            <param name="newChannelOrder">the <see cref="T:TeamSpeak.Sdk.Client.Channel"/> after which <see langword="this"/> <see cref="T:TeamSpeak.Sdk.Client.Channel"/> is sorted. <see langword="null"/> meaning its going to be the first <see cref="T:TeamSpeak.Sdk.Client.Channel"/> under <paramref name="newParent"/>.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.op_Equality(TeamSpeak.Sdk.Client.Channel,TeamSpeak.Sdk.Client.Channel)">
+            <summary>
+            Compares two <see cref="T:TeamSpeak.Sdk.Client.Channel"/> for equality. 
+            </summary>
+            <param name="a">The first <see cref="T:TeamSpeak.Sdk.Client.Channel"/> structure to compare.</param>
+            <param name="b">The second <see cref="T:TeamSpeak.Sdk.Client.Channel"/> structure to compare.</param>
+            <returns>true if the ID and Mode of a and b are equal; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.op_Inequality(TeamSpeak.Sdk.Client.Channel,TeamSpeak.Sdk.Client.Channel)">
+            <summary>
+            Compares two <see cref="T:TeamSpeak.Sdk.Client.Channel"/> for inequality. 
+            </summary>
+            <param name="a">The first <see cref="T:TeamSpeak.Sdk.Client.Channel"/> structure to compare.</param>
+            <param name="b">The second <see cref="T:TeamSpeak.Sdk.Client.Channel"/> structure to compare.</param>
+            <returns>true if the ID and Mode of a and b are different; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>A string that represents the current object.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.Equals(TeamSpeak.Sdk.Client.Channel)">
+            <summary>
+            Indicates whether this instance and a another instance  are equal.
+            </summary>
+            <param name="other">Another instance to compare to.</param>
+            <returns>true if this and  the other instance represent the same value; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal.
+            </summary>
+            <param name="obj">Another object to compare to.</param>
+            <returns>true if obj and this instance are the same type and represent the same value; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Channel.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.ConnectionInfo">
+            <summary>
+            Information about the <see cref="T:TeamSpeak.Sdk.Client.Connection"/>
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.FiletransferBandwidthSent">
+            <summary>
+            How many bytes per second are currently being sent by file transfers
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.FiletransferBandwidthReceived">
+            <summary>
+            How many bytes per second are currently being received by file transfers
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.Ping">
+            <summary>
+            Average latency for a round trip through and back this connection.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.PingDeviation">
+            <summary>
+            Standard deviation of the above average latency
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.IdleTime">
+            <summary>
+            How long since the last action of this client
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.ClientIp">
+            <summary>
+            IP of this client (as seen from the server side)
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.ClientPort">
+            <summary>
+            Port of this client (as seen from the server side)
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.ConnectedTime">
+            <summary>
+            How long the connection exists already
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.PacketsSentSpeech">
+            <summary>
+            How many Speech packets were sent through this connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.PacketsSentKeepalive">
+            <summary>
+            How many Keepalive packets were sent through this connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.PacketsSentControl">
+            <summary>
+            How many Control packets were sent through this connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.PacketsSentTotal">
+            <summary>
+            How many packets were sent totally (this is <see cref="P:TeamSpeak.Sdk.Client.ConnectionInfo.PacketsSentSpeech"/> + <see cref="P:TeamSpeak.Sdk.Client.ConnectionInfo.PacketsSentKeepalive"/> + <see cref="P:TeamSpeak.Sdk.Client.ConnectionInfo.PacketsSentControl"/>)
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BytesSentSpeech">
+            <summary>
+            How many bytes worth of Speech packets were sent through this connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BytesSentKeepalive">
+            <summary>
+            How many bytes worth of Keepalive packets were sent through this connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BytesSentControl">
+            <summary>
+            How many bytes worth of Sent packets were sent through this connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BytesSentTotal">
+            <summary>
+            How many bytes were sent through this connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.PacketsReceivedSpeech">
+            <summary>
+            How many Speech packets were received through this connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.PacketsReceivedKeepalive">
+            <summary>
+            How many Keepalive packets were received through this connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.PacketsReceivedControl">
+            <summary>
+            How many Control packets were received through this connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.PacketsReceivedTotal">
+            <summary>
+            How many packets were received through this connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BytesReceivedSpeech">
+            <summary>
+            How many bytes worth of Speech packets were received through this connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BytesReceivedKeepalive">
+            <summary>
+            How many bytes worth of Keepalive packets were received through this connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BytesReceivedControl">
+            <summary>
+            How many bytes worth of Control packets were received through this connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BytesReceivedTotal">
+            <summary>
+            How many bytes were received through this connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.PacketlossSpeech">
+            <summary>
+            The probability with which speech packet round trip failed because a packet was lost
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.PacketlossKeepalive">
+            <summary>
+            The probability with which keepalive packet round trip failed because a packet was lost
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.PacketlossControl">
+            <summary>
+            The probability with which control packet round trip failed because a packet was lost
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.PacketlossTotal">
+            <summary>
+            The probability with which a packet round trip failed because a packet was lost
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.ServerToClientPacketlossSpeech">
+            <summary>
+            The probability with which a speech packet failed from the server to the client
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.ServerToClientPacketlossKeepalive">
+            <summary>
+            The probability with which a keepalive packet failed from the server to the client
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.ServerToClientPacketlossControl">
+            <summary>
+            The probability with which a control packet failed from the server to the client
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.ServerToClientPacketlossTotal">
+            <summary>
+            The probability with which a packet failed from the client to the server
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.ClientToServerPacketlossSpeech">
+            <summary>
+            The probability with which a Speech packet failed from the client to the server
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.ClientToServerPacketlossKeepalive">
+            <summary>
+            The probability with which a Keepalive packet failed from the client to the server
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.ClientToServerPacketlossControl">
+            <summary>
+            The probability with which a Control packet failed from the client to the server
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.ClientToServerPacketlossTotal">
+            <summary>
+            The probability with which a packet failed from the client to the server
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BandwidthSentLastSecondSpeech">
+            <summary>
+            How many bytes of speech packets we sent during the last second
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BandwidthSentLastSecondKeepalive">
+            <summary>
+            How many bytes of keepalive packets we sent during the last second
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BandwidthSentLastSecondControl">
+            <summary>
+            How many bytes of control packets we sent during the last second
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BandwidthSentLastSecondTotal">
+            <summary>
+            How many bytes of packets we sent during the last second
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BandwidthSentLastMinuteSpeech">
+            <summary>
+            How many bytes/s of speech packets we sent in average during the last minute
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BandwidthSentLastMinuteKeepalive">
+            <summary>
+            How many bytes/s of keepalive packets we sent in average during the last minute
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BandwidthSentLastMinuteControl">
+            <summary>
+            How many bytes/s of control packets we sent in average during the last minute
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BandwidthSentLastMinuteTotal">
+            <summary>
+            How many bytes/s of packets we received in average during the last minute
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BandwidthReceivedLastSecondSpeech">
+            <summary>
+            How many bytes/s of Speech packets we received in average during the last second
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BandwidthReceivedLastSecondKeepalive">
+            <summary>
+            How many bytes/s of Keepalive packets we received in average during the last second
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BandwidthReceivedLastSecondControl">
+            <summary>
+            How many bytes/s of Control packets we received in average during the last second
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BandwidthReceivedLastSecondTotal">
+            <summary>
+            How many bytes/s of packets we received in average during the last second
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BandwidthReceivedLastMinuteSpeech">
+            <summary>
+            How many bytes/s of Speed packets we received in average during the last minute
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BandwidthReceivedLastMinuteKeepalive">
+            <summary>
+            How many bytes/s of Keepalive packets we received in average during the last minute
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BandwidthReceivedLastMinuteControl">
+            <summary>
+            How many bytes/s of Control packets we received in average during the last minute
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.BandwidthReceivedLastMinuteTotal">
+            <summary>
+            How many bytes/s of packets we received in average during the last minute
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.Client">
+            <summary>
+            The <see cref="P:TeamSpeak.Sdk.Client.ConnectionInfo.Client"/>
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.ConnectionInfo.Connection">
+            <summary>
+            The <see cref="T:TeamSpeak.Sdk.Client.Connection"/> 
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.ConnectionInfo.#ctor(TeamSpeak.Sdk.Client.Client)">
+            <summary>
+            Creates a new <see cref="T:TeamSpeak.Sdk.Client.ConnectionInfo"/>-Object
+            </summary>
+            <param name="client">The <see cref="P:TeamSpeak.Sdk.Client.ConnectionInfo.Client"/> for which the <see cref="T:TeamSpeak.Sdk.Client.ConnectionInfo"/> is requested</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.ConnectionInfo.Refresh">
+            <summary>
+            Request more up to date information from the TeamSpeak-Server
+            </summary>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.ConnectionInfo.CleanUp">
+            <summary>
+            Cleans the <see cref="T:TeamSpeak.Sdk.Client.ConnectionInfo"/> up.
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.FileTransfer">
+            <summary>
+            An ongoing file transfer
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileTransfer.ID">
+            <summary>
+            ID of the client
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileTransfer.Connection">
+            <summary>
+            Server Connection
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.FileTransfer.#ctor(TeamSpeak.Sdk.Client.Connection,System.UInt16)">
+            <summary>
+            Creates a new FileTransfer-Object
+            </summary>
+            <remarks>does not start a transfer. To transfer a file use <see cref="M:TeamSpeak.Sdk.Client.Channel.SendFile(System.String,System.String,System.Boolean,System.Boolean,System.String,System.String)"/>  and <see cref="M:TeamSpeak.Sdk.Client.Channel.RequestFile(System.String,System.String,System.Boolean,System.Boolean,System.String,System.String)"/></remarks>
+            <param name="connection">the server connection</param>
+            <param name="id">ID of the client</param>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileTransfer.Name">
+            <summary>
+            the file name
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileTransfer.Path">
+            <summary>
+            the file path
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileTransfer.RemotePath">
+            <summary>
+            the remote path on the server
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileTransfer.Size">
+            <summary>
+            the file size
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileTransfer.SizeDone">
+            <summary>
+            the currently transferred file size 
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileTransfer.Mode">
+            <summary>
+            specifies if the transfer an upload or a download.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileTransfer.Status">
+            <summary>
+            the status of the specified transfer
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileTransfer.CurrentSpeed">
+            <summary>
+            the current speed of the transfer
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileTransfer.AverageSpeed">
+            <summary>
+            the average speed of the specified transfer
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileTransfer.RunTime">
+            <summary>
+            the time the transfer has used
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.FileTransfer.SpeedLimit">
+            <summary>
+            To get the speed limit for the transfer in bytes/s:
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.FileTransfer.Halt(System.Boolean)">
+            <summary>
+            Abort the transfer
+            </summary>
+            <param name="deleteUnfinishedFile">true to delete the unfinished file; otherwise, keep file so it can be resumed.</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.FileTransfer.op_Equality(TeamSpeak.Sdk.Client.FileTransfer,TeamSpeak.Sdk.Client.FileTransfer)">
+            <summary>
+            Compares two <see cref="T:TeamSpeak.Sdk.Client.FileTransfer"/> for equality. 
+            </summary>
+            <param name="a">The first <see cref="T:TeamSpeak.Sdk.Client.FileTransfer"/> structure to compare.</param>
+            <param name="b">The second <see cref="T:TeamSpeak.Sdk.Client.FileTransfer"/> structure to compare.</param>
+            <returns>true if the ID and Mode of a and b are equal; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.FileTransfer.op_Inequality(TeamSpeak.Sdk.Client.FileTransfer,TeamSpeak.Sdk.Client.FileTransfer)">
+            <summary>
+            Compares two <see cref="T:TeamSpeak.Sdk.Client.FileTransfer"/> for inequality. 
+            </summary>
+            <param name="a">The first <see cref="T:TeamSpeak.Sdk.Client.FileTransfer"/> structure to compare.</param>
+            <param name="b">The second <see cref="T:TeamSpeak.Sdk.Client.FileTransfer"/> structure to compare.</param>
+            <returns>true if the ID and Mode of a and b are different; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.FileTransfer.Equals(TeamSpeak.Sdk.Client.FileTransfer)">
+            <summary>
+            Indicates whether this instance and a another instance  are equal.
+            </summary>
+            <param name="other">Another instance to compare to.</param>
+            <returns>true if this and  the other instance represent the same value; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.FileTransfer.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal.
+            </summary>
+            <param name="obj">Another object to compare to.</param>
+            <returns>true if obj and this instance are the same type and represent the same value; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.FileTransfer.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.Library">
+            <summary>
+            TeamSpeak Client Library
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.IsInitialized">
+            <summary>
+            true if the TeamSpeak library has been loaded and initialized; otherwise, false
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Library.Initialize">
+            <summary>
+            Initializes the TeamSpeak clientlib
+            </summary>
+            <remarks>
+            Explicitly loads the TeamSpeak clientlib. Will be automatically invoked by the SDK when required.
+            </remarks>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Library.Initialize(TeamSpeak.Sdk.LogTypes)">
+            <summary>
+            Initializes the TeamSpeak clientlib
+            </summary>
+            <param name="usedLogTypes">The library can output log messages (called by <see cref="M:TeamSpeak.Sdk.Client.Library.Log(TeamSpeak.Sdk.LogLevel,System.String,TeamSpeak.Sdk.Client.Connection,System.String)"/>) to a file (located in the logs directory relative to the client executable), to stdout or to user defined callbacks.</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Library.Initialize(TeamSpeak.Sdk.Client.LibraryParameters)">
+            <summary>
+            Creates a new <see cref="T:TeamSpeak.Sdk.Client.Library"/>-Instance
+            </summary>
+            <param name="parameters">Information used to create the instance</param>
+            <exception cref="T:System.InvalidOperationException">a <see cref="T:TeamSpeak.Sdk.Client.Library"/> is already created</exception>
+            <exception cref="T:System.NullReferenceException"><paramref name="parameters"/> is null</exception>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Library.Destroy">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:TeamSpeak.Sdk.Client.Library"/>
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.NativeBinary">
+            <summary>
+            Location to the TeamSpeak library binary.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.Platform">
+            <summary>
+            Platform the library is running on
+            </summary>
+            <remarks>
+            Used to determine how the native library will loaded and unloaded.
+            </remarks>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.FunctionRarePointers">
+            <summary>
+            Unused by SDK
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.UsedLogTypes">
+            <summary>
+            The library can output log messages (called by <see cref="M:TeamSpeak.Sdk.Client.Library.Log(TeamSpeak.Sdk.LogLevel,System.String,TeamSpeak.Sdk.Client.Connection,System.String)"/>) to a file (located in the logs directory relative to the client executable), to stdout or to user defined callbacks.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.LogFileFolder">
+            <summary>
+            Defines the location where the logs are written to. Pass null for the default behavior, which is to use a folder called logs in the current working directory.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.ResourcesFolder">
+            <summary>
+            Path pointing to the directory where the soundbackends folder is located.
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Library.SoundDeviceListChanged">
+            <summary>
+            Called when the list of sound devices returned by <see cref="M:TeamSpeak.Sdk.Client.Library.GetCaptureDevices(System.String)"/> and <see cref="M:TeamSpeak.Sdk.Client.Library.GetPlaybackDevices(System.String)"/> was changed
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Library.UserLogMessage">
+            <summary>
+            If user-defined logging was enabled when initializing the Client Lib by setting <see cref="F:TeamSpeak.Sdk.LogTypes.Userlogging"/> in <see cref="P:TeamSpeak.Sdk.Client.LibraryParameters.UsedLogTypes"/>, log messages will be sent to the callback, which allows user customizable logging and handling
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.ClientPasswordEncrypt">
+            <summary>
+            Used to hash the password in the same way it is hashed in the outside data store. Or just return the password to send the clear text to the server.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.CustomPacketEncrypt">
+            <summary>
+            Encrypts outgoing data
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.CustomPacketDecrypt">
+            <summary>
+            Decrypts incoming data
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.Connections">
+            <summary>
+            List of all currently existing server connections
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Library.GetPlaybackModes">
+            <summary>
+            Query all available playback modes
+            </summary>
+            <returns>a readonly collection of playback modes.</returns>
+            <seealso cref="M:TeamSpeak.Sdk.Client.Library.GetCaptureModes"/>
+            <seealso cref="M:TeamSpeak.Sdk.Client.Library.GetPlaybackDevices(System.String)"/>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Library.GetCaptureModes">
+            <summary>
+            Query all available capture modes
+            </summary>
+            <returns>a readonly collection of capture modes.</returns>
+            <seealso cref="M:TeamSpeak.Sdk.Client.Library.GetPlaybackModes"/>
+            <seealso cref="M:TeamSpeak.Sdk.Client.Library.GetCaptureDevices(System.String)"/>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Library.GetPlaybackDevices(System.String)">
+            <summary>
+            Get playback devices available for the given mode, as well as the current operating systems default. 
+            </summary>
+            <param name="mode">The playback mode to use. For different modes there might be different devices. Valid modes are returned by <see cref="M:TeamSpeak.Sdk.Client.Library.GetPlaybackModes"/>.</param>
+            <returns>a readonly collection of sound devices.</returns>
+            <remarks>The returned devices values can be used to initialize the devices using <see cref="M:TeamSpeak.Sdk.Client.Connection.OpenPlayback(TeamSpeak.Sdk.Client.ISoundDevice)"/>.</remarks>
+            <remarks>A list of available modes is returned by <see cref="M:TeamSpeak.Sdk.Client.Library.GetPlaybackModes"/></remarks>
+            <seealso cref="M:TeamSpeak.Sdk.Client.Library.GetPlaybackModes"/>
+            <seealso cref="M:TeamSpeak.Sdk.Client.Library.GetCaptureDevices(System.String)"/>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Library.GetCaptureDevices(System.String)">
+            <summary>
+            Get capture devices available for the given mode, as well as the current operating systems default. 
+            </summary>
+            <param name="mode">The capture mode to use. For different modes there might be different devices. Valid modes are returned by <see cref="M:TeamSpeak.Sdk.Client.Library.GetCaptureModes"/>.</param>
+            <returns>a readonly collection of sound devices</returns>
+            <remarks>The returned devices values can be used to initialize the devices using <see cref="M:TeamSpeak.Sdk.Client.Connection.OpenCapture(TeamSpeak.Sdk.Client.ISoundDevice)"/>.</remarks>
+            <remarks>A list of available modes is returned by <see cref="M:TeamSpeak.Sdk.Client.Library.GetCaptureModes"/></remarks>
+            <seealso cref="M:TeamSpeak.Sdk.Client.Library.GetCaptureModes"/>
+            <seealso cref="M:TeamSpeak.Sdk.Client.Library.GetPlaybackDevices(System.String)"/>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.CustomDevices">
+            <summary>
+            List of all currently existing custom devices
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.SpeedLimitUp">
+            <summary>
+            To get the upload speed limit for all virtual servers in bytes/s
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.SpeedLimitDown">
+            <summary>
+            To get the download speed limit for all virtual servers in bytes/s
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.Version">
+            <summary>
+            The complete Client Lib version string can be queried with
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.VersionNumber">
+            <summary>
+            Version number, a part of the complete version string
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Library.CreateIdentity">
+            <summary>
+            To connect to a server, a client application is required to request an identity from the Library. This string should be requested only once and then locally stored in the applications configuration. The next time the application connects to a server, the identity should be read from the configuration and reused again.
+            </summary>
+            <returns>a identity string</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Library.IdentityToUniqueIdentifier(System.String)">
+            <summary>
+            Generate the unique identifier of a identity
+            </summary>
+            <param name="identity">a identity string, that was created by <see cref="M:TeamSpeak.Sdk.Client.Library.CreateIdentity"/></param>
+            <returns>the unique identifier of the identity</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Library.SpawnNewConnection(System.Int32)">
+            <summary>
+            Before connecting to a TeamSpeak 3 server, a new <see cref="T:TeamSpeak.Sdk.Client.Connection"/> needs to be spawned. With a <see cref="T:TeamSpeak.Sdk.Client.Connection"/> a connection can be established and dropped multiple times, so for simply reconnecting to the same or another server no new <see cref="T:TeamSpeak.Sdk.Client.Connection"/> needs to be spawned but existing ones can be reused. However, for using multiple connections simultaneously a new <see cref="T:TeamSpeak.Sdk.Client.Connection"/> has to be spawned for each connection.
+            </summary>
+            <param name="port">Port the client should bind on. Default is 0 to let the operating system chose any free port.</param>
+            <returns>a new <see cref="T:TeamSpeak.Sdk.Client.Connection"/>.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Library.CreateCustomDevice(System.String,TeamSpeak.Sdk.SamplingRate,System.Int32,TeamSpeak.Sdk.SamplingRate,System.Int32)">
+            <summary>
+            Instead of opening existing sound devices that TeamSpeak has detected, you can also use our custom capture and playback mechanism to allow you to override the way in which TeamSpeak does capture and playback. When you have opened a custom capture and playback device you must regularly supply new "captured" sound data via <see cref="M:TeamSpeak.Sdk.Client.CustomDevice.ProcessData(System.Int16[],System.Int32)"/> and retrieve data that should be "played back" via <see cref="M:TeamSpeak.Sdk.Client.CustomDevice.AcquireData(System.Int16[],System.Int32)"/>. Where exactly this captured sound data comes from and where the playback data goes to is up to you, which allows a lot of cool things to be done with this mechanism.
+            A custom device can be opened like any standard device with <see cref="M:TeamSpeak.Sdk.Client.Connection.OpenCapture(TeamSpeak.Sdk.Client.ISoundDevice)"/> and <see cref="M:TeamSpeak.Sdk.Client.Connection.OpenPlayback(TeamSpeak.Sdk.Client.ISoundDevice)"/>.
+            </summary>
+            <param name="name">Displayed name of the custom device. Freely choose a name which identifies your device.</param>
+            <param name="captureRate">Frequency of the capture device.</param>
+            <param name="captureChannels">Number of channels of the capture device. This value depends on if the used codec is a mono or stereo codec.</param>
+            <param name="playbackRate">Frequency of the playback device.</param>
+            <param name="playbackChannels">Number of channels of the playback device.</param>
+            <remarks> Implementing own custom devices is for special use cases and entirely optional.</remarks>
+            <returns>a new <see cref="T:TeamSpeak.Sdk.Client.CustomDevice"/></returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Library.Log(TeamSpeak.Sdk.LogLevel,System.String,TeamSpeak.Sdk.Client.Connection,System.String)">
+            <summary>
+            Basic logging function.
+            </summary>
+            <param name="severity">The level of the message.</param>
+            <param name="message">Text written to log.</param>
+            <param name="connection">Identify the current server connection when using multiple connections. Pass null if unused.</param>
+            <param name="channel">Custom text to categorize the message channel (i.e. "Client", "Sound").</param>
+            <remarks>
+            Log messages can be printed to stdout, logged to a file logs/ts3client_[date]__[time].log and sent to user-defined callbacks. The log output behavior is defined when initializing the client library using <see cref="T:TeamSpeak.Sdk.Client.LibraryParameters"/>.
+            Unless user-defined logging is used, program execution will halt on a log message with severity <see cref="F:TeamSpeak.Sdk.LogLevel.Critical"/>
+            </remarks>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Library.LogLevel">
+            <summary>
+            The minimum severity of log messages that are passed to <see cref="E:TeamSpeak.Sdk.Client.Library.UserLogMessage"/>
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Library.GetErrorMessage(TeamSpeak.Sdk.Error)">
+            <summary>
+            Gets a descriptive text message for a error-code
+            </summary>
+            <param name="error">the error-code</param>
+            <returns>a descriptive text message</returns>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.Client">
+            <summary>
+            Represents a Client on a TeamSpeak-Server
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.ID">
+            <summary>
+            ID of the client
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.Connection">
+            <summary>
+            Server Connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.Channel">
+            <summary>
+            The channel the client is currently joined
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.ConnectionInfo">
+            <summary>
+            Server ConnectionInfo
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Client.#ctor(TeamSpeak.Sdk.Client.Connection,System.UInt16)">
+            <summary>
+            Creates a new Client-Object.
+            </summary>
+            <remarks>does not spawn a new client on the server. To spawn a new client use another <see cref="T:TeamSpeak.Sdk.Client.Connection"/></remarks>
+            <param name="connection">the server connection</param>
+            <param name="id">ID of the client</param>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.UniqueIdentifier">
+            <summary>
+            Unique ID for this client. Stays the same after restarting the application, so you can use this to identify individual users
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.Nickname">
+            <summary>
+            Nickname used by the client. This value is always automatically updated for visible clients
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.Version">
+            <summary>
+            Application version used by this client. Needs to be requested with <see cref="M:TeamSpeak.Sdk.Client.Client.RequestClientVariables"/> unless called on own client
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.Platform">
+            <summary>
+            Operating system used by this client. Needs to be requested with <see cref="M:TeamSpeak.Sdk.Client.Client.RequestClientVariables"/> unless called on own client.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.IsTalking">
+            <summary>
+            Set when the client is currently sending voice data to the server. Always available for visible clients.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.InputMuted">
+            <summary>
+            Indicates the mute status of the clients capture device. Always available for visible clients
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.OutputMuted">
+            <summary>
+            Indicates the combined mute status of the clients playback and capture devices. Always available for visible clients
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.OutputOnlyMuted">
+            <summary>
+            Indicates the mute status of the clients playback device. Always available for visible clients
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.InputHardwareEnabled">
+            <summary>
+            Set if the clients capture device is not available. Always available for visible clients
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.OutputHardware">
+            <summary>
+            True if the clients playback device is not available. Always available for visible clients
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.IsInputDeactivated">
+            <summary>
+            Determines if the sound input is deactivated , only usable for <see cref="P:TeamSpeak.Sdk.Client.Connection.Self"/>, not propagated to the network.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.IdleTime">
+            <summary>
+            Time the client has been idle. Needs to be requested with <see cref="M:TeamSpeak.Sdk.Client.Client.RequestClientVariables"/>
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.DefaultChannel">
+            <summary>
+            Default channel name used in the last <see cref="O:TeamSpeak.Sdk.Client.Connection.Start"/> call. Only available for own client
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.MetaData">
+            <summary>
+            Not used by TeamSpeak 3, offers free storage for SDK users. Always available for visible clients
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.Muted">
+            <summary>
+            Indicates a client has been locally muted. Client-side only
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.IsRecording">
+            <summary>
+            Indicates a client is currently recording all voice data in his channel
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Client.VolumeModificator">
+            <summary>
+            The client volume modifier
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Client.MoveTo(TeamSpeak.Sdk.Client.Channel,System.String)">
+            <summary>
+            Switch the client to a certain channel.
+            </summary>
+            <param name="channel">the channel to join.</param>
+            <param name="password">Optional password. Pass empty string or null if unused.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Client.RequestClientVariables">
+            <summary>
+            Request the latest data for the client from the server.
+            </summary>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Client.KickFromChannel(System.String)">
+            <summary>
+            Kick the client from the channel
+            </summary>
+            <param name="kickReason">A short message explaining why the client is kicked from the channel.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Client.KickFromServer(System.String)">
+            <summary>
+            Kick the client from the server
+            </summary>
+            <param name="kickReason">A short message explaining why the client is kicked from the server.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Client.SendTextMessage(System.String)">
+            <summary>
+            Send a private text message to the client.
+            </summary>
+            <param name="message">The text message</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Client.Set3DAttributes(TeamSpeak.Sdk.Vector)">
+            <summary>
+            Adjust a position and velocity in 3D space
+            </summary>
+            <param name="position">position of the given client in 3D space</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Client.SetWhisperList(TeamSpeak.Sdk.Client.Channel[],TeamSpeak.Sdk.Client.Client[])">
+            <summary>
+            With a whisper list set a client can talk to the specified clients and channels bypassing the standard rule that voice is only transmitted to the current channel. Whisper lists can be defined for individual clients.
+            </summary>
+            <remarks>
+            To control which client is allowed to whisper to own client, the Library implements an internal whisper whitelist mechanism. When a client receives a whisper while the whispering client has not yet been added to the whisper allow list, the receiving client gets the <see cref="E:TeamSpeak.Sdk.Client.Connection.WhisperIgnored"/>-Event. Note that whisper voice data is not received until the sending client is added to the receivers whisper allow list.
+            </remarks>
+            <param name="targetChannelArray">array of channels to whisper to, set to null to disable</param>
+            <param name="targetClientArray">array of clients to whisper to, set to null to disable</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Client.op_Equality(TeamSpeak.Sdk.Client.Client,TeamSpeak.Sdk.Client.Client)">
+            <summary>
+            Compares two <see cref="T:TeamSpeak.Sdk.Client.Client"/> for equality. 
+            </summary>
+            <param name="a">The first <see cref="T:TeamSpeak.Sdk.Client.Client"/> structure to compare.</param>
+            <param name="b">The second <see cref="T:TeamSpeak.Sdk.Client.Client"/> structure to compare.</param>
+            <returns>true if the ID and Mode of a and b are equal; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Client.op_Inequality(TeamSpeak.Sdk.Client.Client,TeamSpeak.Sdk.Client.Client)">
+            <summary>
+            Compares two <see cref="T:TeamSpeak.Sdk.Client.Client"/> for inequality. 
+            </summary>
+            <param name="a">The first <see cref="T:TeamSpeak.Sdk.Client.Client"/> structure to compare.</param>
+            <param name="b">The second <see cref="T:TeamSpeak.Sdk.Client.Client"/> structure to compare.</param>
+            <returns>true if the ID and Mode of a and b are different; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Client.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>A string that represents the current object.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Client.Equals(TeamSpeak.Sdk.Client.Client)">
+            <summary>
+            Indicates whether this instance and a another instance  are equal.
+            </summary>
+            <param name="other">Another instance to compare to.</param>
+            <returns>true if this and  the other instance represent the same value; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Client.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal.
+            </summary>
+            <param name="obj">Another object to compare to.</param>
+            <returns>true if obj and this instance are the same type and represent the same value; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Client.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.Preprocessor">
+            <summary>
+            Parameter of the microphone preprocessor.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Preprocessor.Denoise">
+            <summary>
+            Enable or disable noise suppression. Enabled by default.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Preprocessor.Vad">
+            <summary>
+            Enable or disable Voice Activity Detection. Enabled by default.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Preprocessor.VadLevel">
+            <summary>
+            Voice Activity Detection level in decibel. A high voice activation level 
+            means you have to speak louder into the microphone in order to start transmitting.
+            Reasonable values range from -50 to 50. Default is 0.
+            To adjust the VAD level in your client, you can query <see cref="P:TeamSpeak.Sdk.Client.Preprocessor.DecibelLastPeriod"/> over a period of time to query.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Preprocessor.VadExtraBufferSize">
+            <summary>
+            Voice Activity Detection extra buffer size. Should be 0 to 8, defaults to 2. Lower value means faster transmission, higher value means better VAD quality but higher latency.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Preprocessor.Agc">
+            <summary>
+            Enable or disable Automatic Gain Control. Enabled by default.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Preprocessor.AgcLevel">
+            <summary>
+            AGC level. Default is 16000.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Preprocessor.AgcMaxGain">
+            <summary>
+            AGC max gain. Default is 30
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Preprocessor.EchoCanceling">
+            <summary>
+            Checks if echo canceling is enabled
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Preprocessor.DecibelLastPeriod">
+            <summary>
+            the current voice input level
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Preprocessor.Connection">
+            <summary>
+            Server Connection
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Preprocessor.#ctor(TeamSpeak.Sdk.Client.Connection)">
+            <summary>
+            Create a new Preprocessor-Object
+            </summary>
+            <param name="connection">the server connection</param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.WaveHandle">
+            <summary>
+            Represents a playing wave file
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.WaveHandle.ID">
+            <summary>
+            ID of the WaveHandle
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.WaveHandle.Connection">
+            <summary>
+            Server Connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.WaveHandle.Paused">
+            <summary>
+            Is the playback of the wave-file paused
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.WaveHandle.#ctor(TeamSpeak.Sdk.Client.Connection,System.UInt64)">
+            <summary>
+            Creates a new WaveHandle-Object.
+            </summary>
+            <remarks>does not spawn a new client on the server. To spawn a new client use another <see cref="T:TeamSpeak.Sdk.Client.Connection"/></remarks>
+            <param name="connection">the server connection</param>
+            <param name="id">ID of the client</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.WaveHandle.Close">
+            <summary>
+            Stops the playback of the wave file.
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.WaveHandle.Set3DAttributes(TeamSpeak.Sdk.Vector)">
+            <summary>
+            Set 3D position.
+            </summary>
+            <param name="position">The 3D position of the sound.</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.WaveHandle.op_Equality(TeamSpeak.Sdk.Client.WaveHandle,TeamSpeak.Sdk.Client.WaveHandle)">
+            <summary>
+            Compares two <see cref="T:TeamSpeak.Sdk.Client.WaveHandle"/> for equality. 
+            </summary>
+            <param name="a">The first <see cref="T:TeamSpeak.Sdk.Client.WaveHandle"/> structure to compare.</param>
+            <param name="b">The second <see cref="T:TeamSpeak.Sdk.Client.WaveHandle"/> structure to compare.</param>
+            <returns>true if the ID and Mode of a and b are equal; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.WaveHandle.op_Inequality(TeamSpeak.Sdk.Client.WaveHandle,TeamSpeak.Sdk.Client.WaveHandle)">
+            <summary>
+            Compares two <see cref="T:TeamSpeak.Sdk.Client.WaveHandle"/> for inequality. 
+            </summary>
+            <param name="a">The first <see cref="T:TeamSpeak.Sdk.Client.WaveHandle"/> structure to compare.</param>
+            <param name="b">The second <see cref="T:TeamSpeak.Sdk.Client.WaveHandle"/> structure to compare.</param>
+            <returns>true if the ID and Mode of a and b are different; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.WaveHandle.Equals(TeamSpeak.Sdk.Client.WaveHandle)">
+            <summary>
+            Indicates whether this instance and a another instance  are equal.
+            </summary>
+            <param name="other">Another instance to compare to.</param>
+            <returns>true if this and  the other instance represent the same value; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.WaveHandle.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal.
+            </summary>
+            <param name="obj">Another object to compare to.</param>
+            <returns>true if obj and this instance are the same type and represent the same value; otherwise, false.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.WaveHandle.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Client.Connection">
+            <summary>
+            A connection to a TeamSpeak-Server
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.ID">
+            <summary>
+            ID of the client
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.Preprocessor">
+            <summary>
+            Sound Preprocessor Parameters
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.Self">
+            <summary>
+            the connection as a client object
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.Channels">
+            <summary>
+            A list of channels who have the channel as a parent
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.AllChannels">
+            <summary>
+            A list of all channels on the virtual server
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.AllClients">
+            <summary>
+            A list of all currently visible clients on the virtual server
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.StatusChanged">
+            <summary>
+            After calling <see cref="O:TeamSpeak.Sdk.Client.Connection.Start"/> the client will be informed of the connection status changes by the event
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ProtocolVersionReceived">
+            <summary>
+            While connecting to a server, the protocol version is reported.
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.NewChannel">
+            <summary>
+            Informs about the existence of each channel, after connection has been established, all current channels on the server are announced. This happens with delays to avoid a flood of information after connecting.
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.NewChannelCreated">
+            <summary>
+            After on successfully creating a new Channel the event will be called
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ChannelDeleted">
+            <summary>
+            After deleting a Channel the event will be called.
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ChannelMoved">
+            <summary>
+            Called when a channel is being moved.
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ChannelChanged">
+            <summary>
+            Called when a channel was changed
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ClientUpdated">
+            <summary>
+            Called when a client was changed
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ClientMoved">
+            <summary>
+            Called when a client is actively switching channels.
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ClientMovedSubscription">
+            <summary>
+            Once a channel has been subscribed or unsubscribed, the event is called for each client in the subscribed channel. The event is not to be confused with <see cref="E:TeamSpeak.Sdk.Client.Connection.ClientMoved"/>, which is called for clients actively switching channels.
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ClientTimeout">
+            <summary>
+            When a clients is moved because of a timeout
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ClientKickedFromChannel">
+            <summary>
+            When a client is kicked from a channel
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ClientKickedFromServer">
+            <summary>
+            When a client is kicked from the server
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ServerUpdated">
+            <summary>
+            Called when the virtual server was changed
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ServerError">
+            <summary>
+            Error codes sent by the server to the client
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ServerStop">
+            <summary>
+            Called when the server has been shutdown
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ClientMessage">
+            <summary>
+            Called when a private text message from a client was received
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ChannelMessage">
+            <summary>
+            Called when a channel message was received
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ServerMessage">
+            <summary>
+            Called when a server message was received
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.TalkStatusChanged">
+            <summary>
+            When a client starts or stops talking
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.WhisperIgnored">
+            <summary>
+            Used when whisper is received from a <see cref="T:TeamSpeak.Sdk.Client.Client"/> that has not been added to the whisper allow list.
+            </summary>
+            <remarks>Note that whisper voice data is not received until the sending client is added to the receivers whisper allow list using <see cref="M:TeamSpeak.Sdk.Client.Connection.AllowWhispersFrom(TeamSpeak.Sdk.Client.Client)"/>.</remarks>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ChannelSubscribed">
+            <summary>
+            Called when channel has been subscribed
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ChannelSubscribesFinished">
+            <summary>
+            Marks the end of multiple calls to <see cref="E:TeamSpeak.Sdk.Client.Connection.ChannelSubscribed"/> 
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ChannelUnsubscribed">
+            <summary>
+            Called when channel has been unsubscribed
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ChannelUnsubscribesFinished">
+            <summary>
+            Marks the end of multiple calls to <see cref="E:TeamSpeak.Sdk.Client.Connection.ChannelUnsubscribed"/> 
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ChannelDescriptionUpdated">
+            <summary>
+            Called when the <see cref="P:TeamSpeak.Sdk.Client.Channel.Description"/> was edited
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.ChannelPasswordChanged">
+            <summary>
+            Called when a <see cref="P:TeamSpeak.Sdk.Client.Channel.Password"/> was modified.
+            </summary>
+            <remarks>previously entered channel passwords might be remembered, so this callback announces that the stored password are invalid.</remarks>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.PlaybackShutdownCompleted">
+            <summary>
+            Called after <see cref="M:TeamSpeak.Sdk.Client.Connection.InitiateGracefulPlaybackShutdown"/> finished for a device
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.EditPlaybackVoiceData">
+            <summary>
+            Called when a incoming voice packet from a remote client was decoded and is about to be played, before it is 3D positioned and mixed with other sound sources.
+            The event can be used to alter the voice data (for example when you want to do effects on it) or to record the voice data.
+            </summary>
+            <remarks>This is used by the TeamSpeak client to record sessions.</remarks>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.EditPostProcessVoiceData">
+            <summary>
+            Called when a incoming voice packet from a remote client was decoded and 3D positioned and is about to be played, but before it is mixed with other sounds sources.
+            The event can be used to alter or get the voice data after it has been 3D positioned.
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.EditMixedPlaybackVoiceData">
+            <summary>
+            The following event is called when all sounds that are about to be played back for this server connection have been mixed. This is the last chance to alter/get sound.
+            The event can be used to alter or get the sound data before playback.
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.EditCapturedVoiceData">
+            <summary>
+            Called after sound is recorded from the sound device and is preprocessed. This event can be used to get/alter recorded sound. 
+            It can also be used to determine if this sound will be send, or discarded.
+            </summary>
+            <remarks>This is used by the TeamSpeak client to record sessions.</remarks>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.Custom3dRolloffCalculationClient">
+            <summary>
+            Called to calculate volume attenuation for distance in 3D positioning of clients.
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.Custom3dRolloffCalculationWaveReceived">
+            <summary>
+            Called to calculate volume attenuation for distance in 3D positioning of a wave file that was opened with <see cref="M:TeamSpeak.Sdk.Client.Connection.PlayWaveFile(System.String,System.Boolean)"/>.
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.CheckServerUniqueIdentifier">
+            <summary>
+            Used to check if the unique identifier is the correct one
+            </summary>
+            <remarks>to be used, if a man in the middle attack is be expected</remarks>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.FileTransferStatusReceived">
+            <summary>
+            Called when a file finished being transfered, triggered by <see cref="O:TeamSpeak.Sdk.Client.Channel.SendFile"/>  or <see cref="O:TeamSpeak.Sdk.Client.Channel.RequestFile"/> has finished or aborted with an error.
+            </summary>
+        </member>
+        <member name="E:TeamSpeak.Sdk.Client.Connection.FileInfoReceived">
+            <summary>
+            Called after <see cref="M:TeamSpeak.Sdk.Client.Channel.GetFileInfo(System.String,System.String)"/> containing the reply by the server
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.UniqueIdentifier">
+            <summary>
+            Unique ID for this virtual server. Stays the same after restarting the server application. Always available when connected.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.Name">
+            <summary>
+            Name of this virtual server. Always available when connected.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.WelcomeMessage">
+            <summary>
+            Optional welcome message sent to the client on login. This value should be queried by the client after connection has been established, it is not updated afterwards.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.Platform">
+            <summary>
+            Operating system used by this server. Always available when connected.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.Version">
+            <summary>
+            Application version of this server. Always available when connected.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.MaxClients">
+            <summary>
+            Defines maximum number of clients which may connect to this server. Needs to be requested using <see cref="M:TeamSpeak.Sdk.Client.Connection.RefreshVariables"/>.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.ClientsOnline">
+            <summary>
+            Number of clients currently on this virtual server. Needs to be requested using <see cref="M:TeamSpeak.Sdk.Client.Connection.RefreshVariables"/>.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.ChannelsOnline">
+            <summary>
+            Number of channels currently on this virtual server. Needs to be requested using <see cref="M:TeamSpeak.Sdk.Client.Connection.RefreshVariables"/>.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.Created">
+            <summary>
+            Time when this virtual server was created. Always available when connected.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.Uptime">
+            <summary>
+            Uptime of this virtual server. Needs to be requested using <see cref="M:TeamSpeak.Sdk.Client.Connection.RefreshVariables"/>.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.CodecEncryptionMode">
+            <summary>
+            Defines if voice data encryption is configured per channel, globally forced on or globally forced off for this virtual server. 
+            The default behavior is configure per channel, in this case modifying <see cref="P:TeamSpeak.Sdk.Client.Channel.CodecIsUnencrypted"/>
+            defines voice data encryption of individual channels.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.ServerIp">
+            <summary>
+            IP of the server (seen from the client side)
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.ServerPort">
+            <summary>
+            Port of the server (seen from the client side)
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.IsVoiceRecording">
+            <summary>
+            When using <see cref="E:TeamSpeak.Sdk.Client.Connection.EditCapturedVoiceData"/> to record voice, you should notify the server when recording starts or stops
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.Timeout">
+            <summary>
+            Determines how long the client will wait for a reply from the server.
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.#ctor">
+            <summary>
+            Spawns a new <see cref="T:TeamSpeak.Sdk.Client.Connection"/>
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.#ctor(System.UInt64)">
+            <summary>
+            Creates a new <see cref="T:TeamSpeak.Sdk.Client.Connection"/>-Object with a already known id 
+            </summary>
+            <param name="id">Id of the connection</param>
+            <remarks>does not spawns a new <see cref="T:TeamSpeak.Sdk.Client.Connection"/>, use <see cref="M:TeamSpeak.Sdk.Client.Connection.#ctor"/> or <see cref="M:TeamSpeak.Sdk.Client.Library.SpawnNewConnection(System.Int32)"/> to spawn a new <see cref="T:TeamSpeak.Sdk.Client.Connection"/></remarks>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.Finalize">
+            <summary>
+            Allows Connection to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection.
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the CustomDevice and optionally releases the managed resources.
+            </summary>
+            <param name="disposed">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.Close">
+            <summary>
+            Closes the connection
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.PlaybackDevice">
+            <summary>
+            Currently open playback device. Set using <see cref="M:TeamSpeak.Sdk.Client.Connection.OpenPlayback(TeamSpeak.Sdk.Client.ISoundDevice)"/>
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.CaptureDevice">
+            <summary>
+            Currently open capture device. Set using <see cref="M:TeamSpeak.Sdk.Client.Connection.OpenCapture(TeamSpeak.Sdk.Client.ISoundDevice)"/>
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.Status">
+            <summary>
+            Status of the connection to the given server
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.SpeedLimitUp">
+            <summary>
+            The upload speed limit for the specified virtual server in bytes/s.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.SpeedLimitDown">
+            <summary>
+             The download speed limit for the specified virtual server in bytes/s.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.LocalTestMode">
+            <summary>
+            Instead of sending the sound through the network, it can be routed directly through the playback device, so the user will get immediate audible feedback when for example configuring some sound settings.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.VolumeModifier">
+            <summary>
+            Modify the voice volume of other speakers. Value is in decibel, so 0 is no modification, 
+            negative values make the signal quieter and values greater than zero boost the signal louder than it is.
+            Be careful with high positive values, as you can really cause bad audio quality due to clipping.
+            The maximum possible Value is 30. Zero and all negative values cannot cause clipping and distortion, 
+            and are preferred for optimal audio quality. Values greater than zero and less than +6 dB 
+            might cause moderate clipping and distortion, but should still be within acceptable bounds.
+            Values greater than +6 dB will cause clipping and distortion that will negatively affect your audio quality.
+            It is advised to choose lower values. Generally we recommend to not allow values higher than 15 db.
+            </summary>
+        </member>
+        <member name="P:TeamSpeak.Sdk.Client.Connection.VolumeFactorWave">
+            <summary>
+            Adjust the volume of wave files played by <see cref="M:TeamSpeak.Sdk.Client.Connection.PlayWaveFile(System.String,System.Boolean)"/>.
+            The value is a float defining the volume reduction in decibel.
+            Reasonable values range from �-40.0� (very silent) to �0.0� (loudest).
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.OpenPlayback(TeamSpeak.Sdk.Client.ISoundDevice)">
+            <summary>
+            To initialize a playback device
+            </summary>
+            <param name="device">the device to be used. when null, the default playback is used.</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.OpenCapture(TeamSpeak.Sdk.Client.ISoundDevice)">
+            <summary>
+            To initialize a capture device
+            </summary>
+            <param name="device">the device to be used. when null, the default capture is used.</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.InitiateGracefulPlaybackShutdown">
+            <summary>
+            Prepares the playback device be closed via <see cref="M:TeamSpeak.Sdk.Client.Connection.ClosePlaybackDevice"/>. 
+            Should be used to prevent interrupting of still playing sounds.
+            </summary>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.ClosePlaybackDevice">
+            <summary>
+            Close the playback device
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.CloseCaptureDevice">
+            <summary>
+            Close the capture device
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.ActivateCaptureDevice">
+            <summary>
+            When connecting to multiple servers with the same client, the capture device can only be active for one server at the same time. 
+            As soon as the client connects to a new server, the Library will deactivate the capture device for the previously active server.
+            When a user wants to talk to that previous server again, the client needs to reactivate the capture device.
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.Set3DListenerAttributes(System.Nullable{TeamSpeak.Sdk.Vector},System.Nullable{TeamSpeak.Sdk.Vector},System.Nullable{TeamSpeak.Sdk.Vector})">
+            <summary>
+            Set the position, velocity and orientation of the listener in 3D space
+            </summary>
+            <param name="position">3D position of the listener. If passing null, the parameter is ignored and the value not updated.</param>
+            <param name="forward">Forward orientation of the listener. The vector must be of unit length and perpendicular to the up vector. If passing null, the parameter is ignored and the value not updated.</param>
+            <param name="up">Upward orientation of the listener. The vector must be of unit length and perpendicular to the forward vector. If passing null, the parameter is ignored and the value not updated.</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.Set3DSettings(System.Single,System.Single)">
+            <summary>
+            Adjusts 3D sound system settings
+            </summary>
+            <param name="distanceFactor">Relative distance factor. Default is 1.0 = 1 meter</param>
+            <param name="rolloffScale">Scaling factor for 3D sound roll-off. Defines how fast sound volume will attenuate. As higher the value, as faster the sound is toned with increasing distance.</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.Start(System.String,System.String,System.UInt32,System.String,System.String,System.String,System.String)">
+            <summary>
+            Connect to a TeamSpeak 3 server
+            </summary>
+            <param name="identity">Unique identifier for this server connection. Created with <see cref="M:TeamSpeak.Sdk.Client.Library.CreateIdentity"/></param>
+            <param name="ip">Hostname or IP of the TeamSpeak 3 server.</param>
+            <param name="port">UDP port of the TeamSpeak 3 server, by default 9987.</param>
+            <param name="nickname">On login, the client attempts to take this nickname on the connected server. Note this is not necessarily the actually assigned nickname, as the server can modify the nickname ("gandalf_1" instead the requested "gandalf") or refuse blocked names.</param>
+            <param name="defaultChannel">A channel on the TeamSpeak 3 server. If the channel exists and the user has sufficient rights and supplies the correct password if required, the channel will be joined on login.</param>
+            <param name="defaultChannelPassword">Password for the default channel. Pass null or an empty string if no password is required or no default channel is specified.</param>
+            <param name="serverPassword">Password for the server. Pass null or an empty string if the server does not require a password.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+            <remarks> If you pass a hostname instead of an IP, the Client Lib will try to resolve it to an IP, but the function may block for an unusually long period of time while resolving is taking place. If you are relying on the function to return quickly, we recommend to resolve the hostname yourself (e.g.asynchronously) and then call with the IP instead of the hostname.</remarks>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.Start(System.String,System.String,System.UInt32,System.String,System.String[],System.String,System.String)">
+            <summary>
+            Connect to a TeamSpeak 3 server
+            </summary>
+            <param name="identity">Unique identifier for this server connection. Created with <see cref="M:TeamSpeak.Sdk.Client.Library.CreateIdentity"/></param>
+            <param name="ip">Hostname or IP of the TeamSpeak 3 server.</param>
+            <param name="port">UDP port of the TeamSpeak 3 server, by default 9987.</param>
+            <param name="nickname">On login, the client attempts to take this nickname on the connected server. Note this is not necessarily the actually assigned nickname, as the server can modify the nickname ("gandalf_1" instead the requested "gandalf") or refuse blocked names.</param>
+            <param name="defaultChannelArray">The path to a channel on the TeamSpeak 3 server. If the channel exists and the user has sufficient rights and supplies the correct password if required, the channel will be joined on login. To define the path to a subchannel of arbitrary level, create an array of channel names detailing the position of the default channel (e.g. { "grandparent", "parent", "mydefault" } ). </param>
+            <param name="defaultChannelPassword">Password for the default channel. Pass null or an empty string if no password is required or no default channel is specified.</param>
+            <param name="serverPassword">Password for the server. Pass null or an empty string if the server does not require a password.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+            <remarks> If you pass a hostname instead of an IP, the Client Lib will try to resolve it to an IP, but the function may block for an unusually long period of time while resolving is taking place. If you are relying on the function to return quickly, we recommend to resolve the hostname yourself (e.g.asynchronously) and then call with the IP instead of the hostname.</remarks>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.Start(System.String,System.String,System.UInt32,System.String,System.UInt64,System.String,System.String)">
+            <summary>
+            Connect to a TeamSpeak 3 server
+            </summary>
+            <param name="identity">Unique identifier for this server connection. Created with <see cref="M:TeamSpeak.Sdk.Client.Library.CreateIdentity"/></param>
+            <param name="ip">Hostname or IP of the TeamSpeak 3 server.</param>
+            <param name="port">UDP port of the TeamSpeak 3 server, by default 9987.</param>
+            <param name="nickname">On login, the client attempts to take this nickname on the connected server. Note this is not necessarily the actually assigned nickname, as the server can modify the nickname ("gandalf_1" instead the requested "gandalf") or refuse blocked names.</param>
+            <param name="defaultChannelID">The <see cref="P:TeamSpeak.Sdk.Client.Channel.ID"/> to a channel on the TeamSpeak 3 server. If the channel exists and the user has sufficient rights and supplies the correct password if required, the channel will be joined on login.</param>
+            <param name="defaultChannelPassword">Password for the default channel. Pass null or an empty string if no password is required or no default channel is specified.</param>
+            <param name="serverPassword">Password for the server. Pass null or an empty string if the server does not require a password.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+            <remarks> If you pass a hostname instead of an IP, the Client Lib will try to resolve it to an IP, but the function may block for an unusually long period of time while resolving is taking place. If you are relying on the function to return quickly, we recommend to resolve the hostname yourself (e.g.asynchronously) and then call with the IP instead of the hostname.</remarks>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.Stop(System.String)">
+            <summary>
+            Disconnect from a TeamSpeak 3 server
+            </summary>
+            <param name="quitMessage">A message like for example "leaving".</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.SubscribeAll">
+            <summary>
+            Subscribe to all channels on the server
+            </summary>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.UnsubscribeAll">
+            <summary>
+            Unsubscribe from all channels on the server
+            </summary>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.RefreshVariables">
+            <summary>
+            Refreshing the server information.
+            </summary>
+            <remarks><see cref="E:TeamSpeak.Sdk.Client.Connection.ServerUpdated"/> is called when the information is available</remarks>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.Subscribe(TeamSpeak.Sdk.Client.Channel[])">
+            <summary>
+            Subscribes to one or more channels
+            </summary>
+            <param name="channels">Array of channels to subscribe to.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.Unsubscribe(TeamSpeak.Sdk.Client.Channel[])">
+            <summary>
+            Unsubscribes from one or more channels
+            </summary>
+            <param name="channels">Array of channels to unsubscribe from.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.Mute(TeamSpeak.Sdk.Client.Client[])">
+            <summary>
+            Mutes one or more clients
+            </summary>
+            <param name="clients">Array of clients to be muted</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+            <remarks>
+            Clients can be locally muted. This information is handled client-side only and not visible to other clients. It mainly serves as a sort of individual "ban" or "ignore" feature, where users can decide not to listen to certain clients anymore.
+            When a client becomes muted, he will no longer be heard by the muter. Also the TeamSpeak 3 server will stop sending voice packets.
+            The mute state is not visible to the muted client nor to other clients. It is only available to the muting client by checking <see cref="P:TeamSpeak.Sdk.Client.Client.Muted"/>
+            </remarks>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.Unmute(TeamSpeak.Sdk.Client.Client[])">
+            <summary>
+            Unmute one or more clients
+            </summary>
+            <param name="clients">Array of clients to be muted</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.CreateChannel(System.String,TeamSpeak.Sdk.Client.Channel,System.String,System.String,System.String,TeamSpeak.Sdk.Client.Channel,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{TeamSpeak.Sdk.CodecType},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Int32})">
+            <summary>
+            Create a new Channel
+            </summary>
+            <param name="name">Name of the channel</param>
+            <param name="parent">The parent channel</param>
+            <param name="topic">Single-line channel topic</param>
+            <param name="description">Channel description. Can have multiple lines.</param>
+            <param name="password">Password for password-protected channels.</param>
+            <param name="order">the <see cref="T:TeamSpeak.Sdk.Client.Channel"/> after which the new <see cref="T:TeamSpeak.Sdk.Client.Channel"/> is sorted. <see langword="null"/> meaning its going to be the first <see cref="T:TeamSpeak.Sdk.Client.Channel"/> under <paramref name="parent"/>.</param>
+            <param name="isPermanent">Permanent channels will be restored when the server restarts.</param>
+            <param name="isSemiPermanent">Semi-permanent channels are not automatically deleted when the last user left but will not be restored when the server restarts.</param>
+            <param name="codec">Codec used for this channel</param>
+            <param name="codecQuality">Quality of channel codec of this channel. Valid values range from 0 to 10, default is 7. Higher values result in better speech quality but more bandwidth usage</param>
+            <param name="codecIsUnencrypted">If true, this channel is not using encrypted voice data. If false, voice data is encrypted for this channel.</param>
+            <param name="codecLatencyFactor">Latency of this channel.</param>
+            <returns>A task that represents the asynchronous creation of the channel.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.SendTextMessage(TeamSpeak.Sdk.Client.Client,System.String)">
+            <summary>
+            Send a private text message to a client
+            </summary>
+            <param name="client">The target client.</param>
+            <param name="message">The text message.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.SendTextMessage(TeamSpeak.Sdk.Client.Channel,System.String)">
+            <summary>
+            Send a text message to a channel
+            </summary>
+            <param name="channel">The target channel.</param>
+            <param name="message">The text message.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.SendTextMessage(System.String)">
+            <summary>
+            Send a text message to the server
+            </summary>
+            <param name="message">The text message.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.Move(TeamSpeak.Sdk.Client.Client,TeamSpeak.Sdk.Client.Channel,System.String)">
+            <summary>
+            Move a client to a channel.
+            </summary>
+            <param name="client">The client to move.</param>
+            <param name="channel">The channel to join.</param>
+            <param name="password">Optional password. Pass empty string or null if unused.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.Move(TeamSpeak.Sdk.Client.Channel,TeamSpeak.Sdk.Client.Channel,TeamSpeak.Sdk.Client.Channel)">
+            <summary>
+            Move a channel to a new parent channel
+            </summary>
+            <param name="channel">The channel to be moved.</param>
+            <param name="newParent">The parent channel where the moved channel is to be inserted as child. Use null to insert as top-level channel.</param>
+            <param name="newChannelOrder">the <see cref="T:TeamSpeak.Sdk.Client.Channel"/> after which <paramref name="channel"/> is sorted. <see langword="null"/> meaning its going to be the first <see cref="T:TeamSpeak.Sdk.Client.Channel"/> under <paramref name="newParent"/>.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.PlayWaveFile(System.String,System.Boolean)">
+            <summary>
+            Play a local wave file
+            </summary>
+            <param name="path">Local path of the sound file in WAV format to be played.</param>
+            <param name="loop">If true, the sound will be looping until the <see cref="T:TeamSpeak.Sdk.Client.WaveHandle"/> is paused or closed.</param>
+            <returns>a waveHandle that allows controlling the playback.</returns>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.AllowWhispersFrom(TeamSpeak.Sdk.Client.Client)">
+            <summary>
+            Add a client to the whisper allow list.
+            </summary>
+            <param name="client">The client to be added to the whisper allow list.</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.RemoveFromAllowedWhispersFrom(TeamSpeak.Sdk.Client.Client)">
+            <summary>
+            Remove a client from the whisper allow list.
+            </summary>
+            <param name="client">The client to be removed from the whisper allow list.</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Client.Connection.FindClient(System.String)">
+            <summary>
+            Returns every client with a matching UniqueId
+            </summary>
+            <param name="uniqueIdentifier">UniqueId to look for</param>
+            <returns>A task that represents the asynchronous search operation.</returns>
+        </member>
+        <member name="T:TeamSpeak.Sdk.LibraryVersion">
+            <summary>
+            Known library versions.
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.LocalTestMode">
+            <summary>
+            Modes to test the local capture device.
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.LocalTestMode.Off">
+            <summary>
+            LocalTestMode is disabled.
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.LocalTestMode.LocalVoice">
+            <summary>
+            Only the local capture device is routed to playback.
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.LocalTestMode.LocalAndRemoteVoice">
+            <summary>
+            Both the local capture device and remote voices are routed to playblack.
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.SupportedPlatform">
+            <summary>
+            Platforms the SDK can run on
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.CodecEncryptionMode">
+            <summary>
+            Encryption mode used by the TeamSpeak-Server
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.CodecEncryptionMode.PerChannel">
+            <summary>
+            Encryption is configured per <see cref="T:TeamSpeak.Sdk.Client.Channel"/> using <see cref="P:TeamSpeak.Sdk.Client.Channel.CodecIsUnencrypted"/>
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.CodecEncryptionMode.ForcedOff">
+            <summary>
+            Encryption is forced off server-wide.
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.CodecEncryptionMode.ForcedOn">
+            <summary>
+            Encryption is forced on server-wide.
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.CodecType">
+            <summary>
+            Codec used to transmit voice data
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.CodecType.SpeexNarrowband">
+            <summary>
+            mono,   16bit,  8kHz, bitrate dependent on the quality setting
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.CodecType.SpeexWideband">
+            <summary>
+            mono,   16bit, 16kHz, bitrate dependent on the quality setting
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.CodecType.SpeexUltrawideband">
+            <summary>
+            mono,   16bit, 32kHz, bitrate dependent on the quality setting
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.CodecType.CeltMono">
+            <summary>
+            mono,   16bit, 48kHz, bitrate dependent on the quality setting
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.CodecType.OpusVoice">
+            <summary>
+            mono,   16bit, 48khz, bitrate dependent on the quality setting, optimized for voice
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.CodecType.OpusMusic">
+            <summary>
+            stereo, 16bit, 48khz, bitrate dependent on the quality setting, optimized for music
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.Name">
+            <summary>
+            Available for all channels that are "in view", always up-to-date
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.Topic">
+            <summary>
+            Available for all channels that are "in view", always up-to-date
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.Description">
+            <summary>
+            Must be requested (=> requestChannelDescription)
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.Password">
+            <summary>
+            not available client side
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.Codec">
+            <summary>
+            Available for all channels that are "in view", always up-to-date
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.CodecQuality">
+            <summary>
+            Available for all channels that are "in view", always up-to-date
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.Maxclients">
+            <summary>
+            Available for all channels that are "in view", always up-to-date
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.Maxfamilyclients">
+            <summary>
+            Available for all channels that are "in view", always up-to-date
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.Order">
+            <summary>
+            Available for all channels that are "in view", always up-to-date
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.FlagPermanent">
+            <summary>
+            Available for all channels that are "in view", always up-to-date
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.FlagSemiPermanent">
+            <summary>
+            Available for all channels that are "in view", always up-to-date
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.FlagDefault">
+            <summary>
+            Available for all channels that are "in view", always up-to-date
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.FlagPassword">
+            <summary>
+            Available for all channels that are "in view", always up-to-date
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.CodecLatencyFactor">
+            <summary>
+            Available for all channels that are "in view", always up-to-date
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.CodecIsUnencrypted">
+            <summary>
+            Available for all channels that are "in view", always up-to-date
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.SecuritySalt">
+            <summary>
+            Not available client side, not used in TeamSpeak, only SDK. Sets the options+salt for security hash.
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ChannelProperty.DeleteDelay">
+            <summary>
+            How many seconds to wait before deleting this channel
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.SamplingRate">
+            <summary>
+            The rate of samples in Hz
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.TransferMode">
+            <summary>
+            The mode of a <see cref="T:TeamSpeak.Sdk.Client.FileTransfer"/>
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.TransferMode.Download">
+            <summary>
+            A file is being downloaded
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.TransferMode.Upload">
+            <summary>
+            A file is being uploaded
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.UniqueIdentifier">
+            <summary>
+            automatically up-to-date for any  "in view", can be used to identify this particular  installation
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.Nickname">
+            <summary>
+            automatically up-to-date for any  "in view"
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.Version">
+            <summary>
+            for other s than ourself, this needs to be requested (=> requestVariables)
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.Platform">
+            <summary>
+            for other s than ourself, this needs to be requested (=> requestVariables)
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.FlagTalking">
+            <summary>
+            automatically up-to-date for any  that can be heard (in room / whisper)
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.InputMuted">
+            <summary>
+            automatically up-to-date for any  "in view", this s microphone mute status
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.OutputMuted">
+            <summary>
+            automatically up-to-date for any  "in view", this s headphones/speakers/mic combined mute status
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.OutputonlyMuted">
+            <summary>
+            automatically up-to-date for any  "in view", this s headphones/speakers only mute status
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.InputHardware">
+            <summary>
+            automatically up-to-date for any  "in view", this s microphone hardware status (is the capture device opened?)
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.OutputHardware">
+            <summary>
+            automatically up-to-date for any  "in view", this s headphone/speakers hardware status (is the playback device opened?)
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.InputDeactivated">
+            <summary>
+            only usable for ourself, not propagated to the network
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.IdleTime">
+            <summary>
+            internal use
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.DefaultChannel">
+            <summary>
+            only usable for ourself, the default channel we used to connect on our last connection attempt
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.DefaultChannelPassword">
+            <summary>
+            internal use
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.ServerPassword">
+            <summary>
+            internal use
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.MetaData">
+            <summary>
+            automatically up-to-date for any  "in view", not used by TeamSpeak, free storage for sdk users
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.IsMuted">
+            <summary>
+            only make sense on the  side locally, "1" if this  is currently muted by us, "0" if he is not
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.IsRecording">
+            <summary>
+            automatically up-to-date for any  "in view"
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.VolumeModificator">
+            <summary>
+            internal use
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.VersionSign">
+            <summary>
+            sign
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ClientProperty.SecurityHash">
+            <summary>
+            SDK use, not used by TeamSpeak. Hash is provided by an outside source. A channel will use the security salt + other  data to calculate a hash, which must be the same as the one provided here.
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.VirtualServerProperty.UniqueIdentifier">
+            <summary>
+            available when connected, can be used to identify this particular server installation
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.VirtualServerProperty.Name">
+            <summary>
+            available and always up-to-date when connected
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.VirtualServerProperty.Welcomemessage">
+            <summary>
+            available when connected,  (=> requestServerVariables)
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.VirtualServerProperty.Platform">
+            <summary>
+            available when connected
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.VirtualServerProperty.Version">
+            <summary>
+            available when connected
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.VirtualServerProperty.Maxclients">
+            <summary>
+            only available on request (=> requestServerVariables), stores the maximum number of clients that may currently join the server
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.VirtualServerProperty.Password">
+            <summary>
+            not available to clients, the server password
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.VirtualServerProperty.ClientsOnline">
+            <summary>
+            only available on request (=> requestServerVariables),
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.VirtualServerProperty.ChannelsOnline">
+            <summary>
+            only available on request (=> requestServerVariables),
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.VirtualServerProperty.Created">
+            <summary>
+            available when connected, stores the time when the server was created
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.VirtualServerProperty.Uptime">
+            <summary>
+            only available on request (=> requestServerVariables), the time since the server was started
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.VirtualServerProperty.CodecEncryptionMode">
+            <summary>
+            available and always up-to-date when connected
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.Ping">
+            <summary>
+            average latency for a round trip through and back this connection
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.PingDeviation">
+            <summary>
+            standard deviation of the above average latency
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.ConnectedTime">
+            <summary>
+            how long the  exists already
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.IdleTime">
+            <summary>
+            how long since the last action of this client
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.ClientIp">
+            <summary>
+            IP of this client (as seen from the server side)
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.ClientPort">
+            <summary>
+            Port of this client (as seen from the server side)
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.ServerIp">
+            <summary>
+            IP of the server (seen from the client side) - only available on yourself, not for remote clients, not available server side
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.ServerPort">
+            <summary>
+            Port of the server (seen from the client side) - only available on yourself, not for remote clients, not available server side
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.PacketsSentSpeech">
+            <summary>
+            how many Speech packets were sent through this connection
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.PacketsSentTotal">
+            <summary>
+            how many packets were sent totally (this is PACKETSSentSpeech + packetsSentKeepalive + packetsSentControl)
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.PacketlossTotal">
+            <summary>
+            the probability with which a packet round trip failed because a packet was lost
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.Server2clientPacketlossSpeech">
+            <summary>
+            the probability with which a speech packet failed from the server to the client
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.BandwidthSentLastSecondSpeech">
+            <summary>
+            how many bytes of speech packets we sent during the last second
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.BandwidthSentLastMinuteSpeech">
+            <summary>
+            how many bytes/s of speech packets we sent in average during the last minute
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.FiletransferBandwidthSent">
+            <summary>
+            how many bytes per second are currently being sent by file transfers
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.FiletransferBandwidthReceived">
+            <summary>
+            how many bytes per second are currently being received by file transfers
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.FiletransferBytesReceivedTotal">
+            <summary>
+            how many bytes we received in total through file transfers
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectionProperty.FiletransferBytesSentTotal">
+            <summary>
+            how many bytes we sent in total through file transfers
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.LogLevel">
+            <summary>
+            The severity of a log message
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.LogLevel.Critical">
+            <summary>
+            these messages stop the program
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.LogLevel.Error">
+            <summary>
+            everything that is really bad, but not so bad we need to shut down
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.LogLevel.Warning">
+            <summary>
+            everything that *might* be bad
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.LogLevel.Debug">
+            <summary>
+            output that might help find a problem
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.LogLevel.Info">
+            <summary>
+            informational output, like "starting database version x.y.z"
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.LogLevel.Devel">
+            <summary>
+            developer only output (will not be displayed in release mode)
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.LogTypes">
+            <summary>
+            The different logging mechanisms.
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.LogTypes.None">
+            <summary>
+            No logging-mechanism
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.LogTypes.File">
+            <summary>
+            Log into file
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.LogTypes.Console">
+            <summary>
+            Log to console
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.LogTypes.Userlogging">
+            <summary>
+            Enable user-defined-logging
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.LogTypes.Database">
+            <summary>
+            Only available in server lib.
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.LogTypes.Syslog">
+            <summary>
+            Log into syslog
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.ConnectStatus">
+            <summary>
+            Status of the <see cref="T:TeamSpeak.Sdk.Client.Connection"/>
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectStatus.Disconnected">
+            <summary>
+            There is no activity to the server, this is the default value
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectStatus.Connecting">
+            <summary>
+            We are trying to connect, we haven't got a clientID yet, we haven't been accepted by the server
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectStatus.Connected">
+            <summary>
+            The server has accepted us, we can talk and hear and we got a clientID, but we don't have the channels and clients yet, we can get server infos (welcome message etc.)
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectStatus.ConnectionEstablishing">
+            <summary>
+            we are CONNECTED and we are visible
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.ConnectStatus.ConnectionEstablished">
+            <summary>
+            we are CONNECTED and we have the client and channels available
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.FileTransferState">
+            <summary>
+            State of the <see cref="T:TeamSpeak.Sdk.Client.FileTransfer"/>
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.FileTransferState.Initializing">
+            <summary>
+            Transfer is being initialized.
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.FileTransferState.Active">
+            <summary>
+            File is being transfered.
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.FileTransferState.Finished">
+            <summary>
+            Transfer finished.
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Speakers">
+            <summary>
+            The speaker a channel is mapped to.
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.TalkStatus">
+            <summary>
+            State of the <see cref="N:TeamSpeak.Sdk.Client"/> voice transmission
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.TalkStatus.NotTalking">
+            <summary>
+            No voice data is being transmitted.
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.TalkStatus.Talking">
+            <summary>
+            Voice data is being transmitted.
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.TalkStatus.TalkingWhileDisabled">
+            <summary>
+            Voice data would be transmitted, but <see cref="P:TeamSpeak.Sdk.Client.Client.IsInputDeactivated"/> is true.
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Error">
+            <summary>
+            Error-Codes the Library can return
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Visibility">
+            <summary>
+            Visibility of a client
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.Visibility.Enter">
+            <summary>
+            Client came into view
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.Visibility.Retain">
+            <summary>
+            Client remained in view
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.Visibility.Leave">
+            <summary>
+            Client left view
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.TeamSpeakException">
+            <summary>
+            The exception that is thrown when a call to the native library failed.
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.TeamSpeakException.#ctor(TeamSpeak.Sdk.Error,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TeamSpeak.Sdk.TeamSpeakException"/> class with a specified error code and error message.
+            </summary>
+            <param name="errorCode">A error code that describes the error.</param>
+            <param name="message">A string that describes the error. The content of message is intended to be understood by humans.</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.TeamSpeakException.#ctor(TeamSpeak.Sdk.Error,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TeamSpeak.Sdk.TeamSpeakException"/> class with a specified error code, error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="errorCode">A error code that describes the error.</param>
+            <param name="message">A string that describes the error. The content of message is intended to be understood by humans.</param>
+            <param name="inner">The exception that is the cause of the current exception. If the innerException parameter is not null, the current exception is raised in a catch block that handles the inner exception.</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.TeamSpeakException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TeamSpeak.Sdk.TeamSpeakException"/> with the specified serialization and context information.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown. </param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination. </param>
+        </member>
+        <member name="P:TeamSpeak.Sdk.TeamSpeakException.ErrorCode">
+            <summary>
+            Error code return by the native library.
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.TeamSpeakException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Sets the SerializationInfo with information about the exception.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown. </param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination. </param>
+        </member>
+        <member name="T:TeamSpeak.Sdk.FileListType">
+            <summary>
+            Type of the file entry on the TeamSpeak-Server
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.FileListType.Directory">
+            <summary>
+            Entry is a directory
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.FileListType.File">
+            <summary>
+            Entry is a file
+            </summary>
+        </member>
+        <member name="T:TeamSpeak.Sdk.Vector">
+            <summary>
+             A vector in 3D space
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.Vector.X">
+            <summary>
+            The x-coordinate of this <see cref="T:TeamSpeak.Sdk.Vector"/> structure.
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.Vector.Y">
+            <summary>
+            The y-coordinate of this <see cref="T:TeamSpeak.Sdk.Vector"/> structure.
+            </summary>
+        </member>
+        <member name="F:TeamSpeak.Sdk.Vector.Z">
+            <summary>
+            The z-coordinate of this <see cref="T:TeamSpeak.Sdk.Vector"/> structure.
+            </summary>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Vector.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TeamSpeak.Sdk.Vector"/> structure. 
+            </summary>
+            <param name="x">The <see cref="F:TeamSpeak.Sdk.Vector.X"/> value</param>
+            <param name="y">The <see cref="F:TeamSpeak.Sdk.Vector.Y"/> value</param>
+            <param name="z">The <see cref="F:TeamSpeak.Sdk.Vector.Z"/> value</param>
+        </member>
+        <member name="M:TeamSpeak.Sdk.Vector.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>A string that represents the current object.</returns>
+        </member>
+        <member name="F:PlatformSpecific.NativeUnixMehods.Dl_info.dli_fname">
+            <summary>
+            Pathname of shared object that contains address
+            </summary>
+        </member>
+        <member name="F:PlatformSpecific.NativeUnixMehods.Dl_info.dli_fbase">
+            <summary>
+            Address at which shared object is loaded
+            </summary>
+        </member>
+        <member name="F:PlatformSpecific.NativeUnixMehods.Dl_info.dli_sname">
+            <summary>
+            Name of nearest symbol with address lower than addr
+            </summary>
+        </member>
+        <member name="F:PlatformSpecific.NativeUnixMehods.Dl_info.dli_saddr">
+            <summary>
+            Exact address of symbol named in dli_sname
+            </summary>
+        </member>
+        <member name="M:PlatformSpecific.TryGetNativeBinaryName(System.String[]@,TeamSpeak.Sdk.SupportedPlatform@)">
+            <summary>
+            Returns the name of the native sdk binary that fits the current environment
+            </summary>
+            <param name="names">possible names of the native sdk binary</param>
+            <param name="platform">detected platform</param>
+            <returns>true if a matching binary exists</returns>
+        </member>
+    </members>
+</doc>
