@@ -1,1 +1,1 @@
-# OverwatchProximityChatParser
+# Overwatch Proximity Chat
