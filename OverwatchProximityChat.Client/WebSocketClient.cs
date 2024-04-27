@@ -1,5 +1,4 @@
 ﻿using OverwatchProximityChat.Shared;
-using OverwatchProximityChatParser.Converters;
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -35,8 +34,6 @@ namespace OverwatchProximityChat.Client
 
         protected override void OnConnected()
         {
-            m_EstablishedConnection = true;
-
             m_MainWindow.Dispatcher.Invoke(() =>
             {
                 SendAsync(JsonSerializer.Serialize(m_MainWindow.GetLinkPlayerData()));

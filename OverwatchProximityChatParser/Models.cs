@@ -1,7 +1,7 @@
-﻿using OverwatchProximityChatParser.WebSocket;
+﻿using OverwatchProximityChat.Parser.WebSocket;
 using System.Numerics;
 
-namespace OverwatchProximityChatParser
+namespace OverwatchProximityChat.Parser
 {
     public static class Models
     {

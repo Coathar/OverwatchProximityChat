@@ -3,9 +3,9 @@ using OverwatchProximityChat.Shared;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
-using static OverwatchProximityChatParser.Models;
+using static OverwatchProximityChat.Parser.Models;
 
-namespace OverwatchProximityChatParser.WebSocket
+namespace OverwatchProximityChat.Parser.WebSocket
 {
     public class WebSocketSession : TcpSession
     {

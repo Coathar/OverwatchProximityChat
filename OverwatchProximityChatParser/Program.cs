@@ -1,7 +1,7 @@
-﻿using OverwatchProximityChatParser.WebSocket;
+﻿using OverwatchProximityChat.Parser.WebSocket;
 using System.Net;
 
-namespace OverwatchProximityChatParser
+namespace OverwatchProximityChat.Parser
 {
     public class Program
     {

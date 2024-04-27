@@ -1,11 +1,12 @@
 ﻿using OverwatchProximityChat.Shared;
-using OverwatchProximityChatParser.Converters;
-using OverwatchProximityChatParser.WebSocket;
+using OverwatchProximityChat.Shared;
+using OverwatchProximityChat.Parser.WebSocket;
 using System.Diagnostics;
 using System.Numerics;
 using System.Text.Json;
-using static OverwatchProximityChatParser.Models;
-namespace OverwatchProximityChatParser
+using static OverwatchProximityChat.Parser.Models;
+
+namespace OverwatchProximityChat.Parser
 {
     public class WorkshopLogReader
     {

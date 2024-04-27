@@ -2,7 +2,7 @@
 using System.Net.Sockets;
 using System.Net;
 
-namespace OverwatchProximityChatParser.WebSocket
+namespace OverwatchProximityChat.Parser.WebSocket
 {
     internal class WebSocketServer : TcpServer
     {

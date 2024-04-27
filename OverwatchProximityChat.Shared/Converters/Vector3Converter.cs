@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Numerics;
 
-namespace OverwatchProximityChatParser.Converters
+namespace OverwatchProximityChat.Shared
 {
     public class Vector3Converter : JsonConverter<Vector3>
     {
