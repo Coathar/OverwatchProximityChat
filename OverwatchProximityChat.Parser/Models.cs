@@ -84,6 +84,7 @@ namespace OverwatchProximityChat.Parser
         {
             AWAITING_PLAYERS,
             IN_PROGRESS,
+            PAUSED,
             COMPLETED
         }
     }

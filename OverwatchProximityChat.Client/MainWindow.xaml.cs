@@ -69,7 +69,11 @@ namespace OverwatchProximityChat.Client
                 Library.Initialize(libParameters);
 
             m_TeamSpeakConnection = Library.SpawnNewConnection();
-            m_WebSocketClient = new WebSocketClient(IPAddress.Parse(m_Options.WebSocketServerAddress), m_Options.WebSocketServerPort, this);
+            if (!IPAddress.TryParse(m_Options.WebSocketServerAddress, out IPAddress ipAddress))
+            {
+                ipAddress = Dns.GetHostEntry(m_Options.WebSocketServerAddress).AddressList[0];
+            }
+            m_WebSocketClient = new WebSocketClient(ipAddress, m_Options.WebSocketServerPort, this);
 
             #region Setup Audio Devicecs
             ICollection<string> captureModes = Library.GetCaptureModes();
@@ -289,7 +293,7 @@ namespace OverwatchProximityChat.Client
                     }
                 }
             }
-            else if (m_TeamSpeakConnection.Status == ConnectStatus.ConnectionEstablished)
+            else
             {
                 this.Disconnect();
             }
@@ -461,7 +465,10 @@ namespace OverwatchProximityChat.Client
             }
             else
             {
-                MessageBox.Show("Invalid Link Code", "Error", MessageBoxButton.OK);
+                this.Dispatcher.Invoke(() =>
+                {
+                    MessageBox.Show("Invalid Link Code", "Error", MessageBoxButton.OK);
+                });
                 this.Disconnect();
             }
         }

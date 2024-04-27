@@ -213,6 +213,19 @@ namespace OverwatchProximityChat.Parser
 
             PlayerCreate parsedData = JsonSerializer.Deserialize<PlayerCreate>(data, m_SerializerOptions);
 
+            // Make sure no player exists in the slot already... handles swapped players around between teams
+            Player existingPlayer = Game.Players.Where(x => x.Slot == parsedData.Slot).FirstOrDefault();
+
+            if (existingPlayer != null)
+            {
+                existingPlayer.WebSocketSession?.Send(JsonSerializer.Serialize(new WebSocketPacket()
+                {
+                    MessageType = MessageType.Disconnect
+                }));
+
+                Game.Players.Remove(existingPlayer);
+            }
+
             Game.Players.Add(new Player()
             {
                 Slot = parsedData.Slot,
@@ -235,8 +248,8 @@ namespace OverwatchProximityChat.Parser
 
             PlayerRemove parsedData = JsonSerializer.Deserialize<PlayerRemove>(data, m_SerializerOptions);
 
-            Player player = Game.Players.Where(x => x.Slot == parsedData.Slot).First();
-            player.WebSocketSession?.Disconnect();
+            Player? player = Game.Players.FirstOrDefault(x => x.Slot == parsedData.Slot);
+            player?.WebSocketSession?.Disconnect();
 
             Game.Players.Remove(player);
 
@@ -269,6 +282,7 @@ namespace OverwatchProximityChat.Parser
                 if (Game.GameStatus == GameStatus.IN_PROGRESS)
                 {
                     VicreoManager.GetInstance().SendCombo("up", ["shift"]);
+                    Game.GameStatus = GameStatus.PAUSED;
                 }
             }
 
@@ -431,6 +445,12 @@ namespace OverwatchProximityChat.Parser
 
                 // Increment Ready
                 VicreoManager.GetInstance().SendPress("Q");
+
+                if (Game.GameStatus == GameStatus.PAUSED)
+                {
+                    VicreoManager.GetInstance().SendCombo("up", ["shift"]);
+                    Game.GameStatus = GameStatus.IN_PROGRESS;
+                }
             }
             else
             {
