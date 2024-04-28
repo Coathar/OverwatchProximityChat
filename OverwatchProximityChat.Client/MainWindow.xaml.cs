@@ -1,8 +1,11 @@
-﻿using OverwatchProximityChat.Client.Extensions;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.VisualBasic.FileIO;
+using OverwatchProximityChat.Client.Extensions;
 using OverwatchProximityChat.Shared;
 using SharpHook;
 using SharpHook.Native;
 using System.Collections.Concurrent;
+using System.Data.Common;
 using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
@@ -20,6 +23,8 @@ namespace OverwatchProximityChat.Client
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly ILogger<MainWindow> logger;
+
         private TaskPoolGlobalHook m_HookPool;
         private Connection m_TeamSpeakConnection;
         private WebSocketClient m_WebSocketClient;
@@ -40,21 +45,14 @@ namespace OverwatchProximityChat.Client
 
         private HashSet<KeyCode> m_HeldKeys = new HashSet<KeyCode>();
 
-        [DllImport("Kernel32")]
-        public static extern void AllocConsole();
-
-        [DllImport("Kernel32", SetLastError = true)]
-        public static extern void FreeConsole();
-
-        public MainWindow()
+        public MainWindow(ILoggerFactory loggerFactory)
         {
             InitializeComponent();
-            AllocConsole();
-
-            m_HookPool = new TaskPoolGlobalHook();
-            m_HookPool.KeyPressed += HookPool_KeyPressed;
+           
+            // m_HookPool = new TaskPoolGlobalHook();
+           /* m_HookPool.KeyPressed += HookPool_KeyPressed;
             m_HookPool.KeyReleased += HookPool_KeyReleased;
-            m_HookPool.RunAsync();
+            m_HookPool.RunAsync();*/
 
             m_Options = new Options();
             if (File.Exists("options.json"))
@@ -89,9 +87,7 @@ namespace OverwatchProximityChat.Client
                 });
             }
 
-            inputDeviceSelectorComboBox.ItemsSource = m_CaptureDevices;
-
-            ICollection<SoundDevice> playbackDevices = Library.GetPlaybackDevices(mode);
+/*          ICollection<SoundDevice> playbackDevices = Library.GetPlaybackDevices(mode);
             foreach (SoundDevice device in playbackDevices)
             {
 
@@ -100,11 +96,11 @@ namespace OverwatchProximityChat.Client
                     SoundDevice = device,
                     Name = device.Name
                 });
-            }
+            }*/
 
             inputDeviceSelectorComboBox.ItemsSource = m_CaptureDevices;
-            outputDeviceSelectorComboBox.ItemsSource = m_PlaybackDevices;
-
+            // outputDeviceSelectorComboBox.ItemsSource = m_PlaybackDevices;
+/*
             if (!string.IsNullOrEmpty(m_Options.OutputDeviceID))
             {
                 try
@@ -119,7 +115,7 @@ namespace OverwatchProximityChat.Client
             else
             {
                 OpenDefaultPlaybackDevice();
-            }
+            }*/
 
             if (!string.IsNullOrEmpty(m_Options.InputDeviceID))
             {
@@ -138,7 +134,7 @@ namespace OverwatchProximityChat.Client
             }
 
             inputDeviceSelectorComboBox.SelectedItem = m_CaptureDevices.Where(x => x.SoundDevice.ID == m_Options.InputDeviceID).First();
-            outputDeviceSelectorComboBox.SelectedItem = m_PlaybackDevices.Where(x => x.SoundDevice.ID == m_Options.OutputDeviceID).First();
+            // outputDeviceSelectorComboBox.SelectedItem = m_PlaybackDevices.Where(x => x.SoundDevice.ID == m_Options.OutputDeviceID).First();
             #endregion
 
             teamSpeakServerNicknameTextBox.Text = m_Options.TeamSpeakDisplayName;
@@ -150,6 +146,22 @@ namespace OverwatchProximityChat.Client
             deafenHotkeyAltCheckbox.IsChecked = (m_Options.DeafenHotkeyModifier & KeyModifier.Alt) != 0;
             deafenHotkeyShiftCheckbox.IsChecked = (m_Options.DeafenHotkeyModifier & KeyModifier.Shift) != 0;
             deafenHotkeyControlCheckbox.IsChecked = (m_Options.DeafenHotkeyModifier & KeyModifier.Ctrl) != 0;
+
+            masterVolumeSlider.Value = m_Options.MasterVolume;
+
+            currentMasterVolumeContentLabel.Content = m_Options.MasterVolume.ToString("+0.#;-#.#");
+            if (m_Options.MasterVolume <= 0)
+            {
+                currentMasterVolumeContentLabel.Foreground = Brushes.Green;
+            }
+            else if (m_Options.MasterVolume <= 6)
+            {
+                currentMasterVolumeContentLabel.Foreground = Brushes.Orange;
+            }
+            else
+            {
+                currentMasterVolumeContentLabel.Foreground = Brushes.Red;
+            }
 
             ResetHotkeyButtons();
             m_CompletedLoading = true;
@@ -256,6 +268,12 @@ namespace OverwatchProximityChat.Client
 
                 connectButton.Content = "Connecting...";
 
+                m_TeamSpeakConnection.ClosePlaybackDevice();
+                m_TeamSpeakConnection.CloseCaptureDevice();
+
+                m_TeamSpeakConnection.OpenPlayback();
+                m_TeamSpeakConnection.OpenCapture();
+
                 m_TeamSpeakConnection.TalkStatusChanged += (client, status, whisper) => { UpdateTalkingStatus(client, status); };
                 m_TeamSpeakConnection.StatusChanged += Connection_StatusChangedAsync;
                 m_TeamSpeakConnection.ClientTimeout += (client, oldChannel, newChannel, visibility, message) => { UpdateUserList(); };
@@ -317,7 +335,7 @@ namespace OverwatchProximityChat.Client
 
         private void UpdateTalkingStatus(TeamSpeak.Sdk.Client.Client client, TalkStatus talkStatus)
         {
-            if (client == null)
+            if (client == null || string.IsNullOrEmpty(client.UniqueIdentifier))
             {
                 return;
             }
@@ -476,6 +494,8 @@ namespace OverwatchProximityChat.Client
         public void Disconnect()
         {
             m_TeamSpeakConnection?.Stop();
+            m_TeamSpeakConnection?.CloseCaptureDevice();
+            m_TeamSpeakConnection?.ClosePlaybackDevice();
             m_WebSocketClient?.DisconnectAndStop();
             m_ClientDictionary.Clear();
 
@@ -489,7 +509,7 @@ namespace OverwatchProximityChat.Client
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.Disconnect();
-            m_HookPool.Dispose();
+            // m_HookPool.Dispose();
 
             foreach (UserOptionWindow optionWindow in m_OpenedUserOptions.Values)
             {
@@ -538,6 +558,7 @@ namespace OverwatchProximityChat.Client
                     m_OpenedUserOptions.Add(user.ClientID, optionWindow);
                     optionWindow.Closed += OptionWindow_Closed;
                     optionWindow.Show();
+                    optionWindow.Activate();
                 }
             }
             else if (e.MiddleButton == System.Windows.Input.MouseButtonState.Pressed && m_Spectating)
@@ -677,6 +698,26 @@ namespace OverwatchProximityChat.Client
             }
 
             m_Options.DeafenHotkeyModifier = deafenKeyModifier;
+        }
+
+        private void masterVolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            m_Options.MasterVolume = masterVolumeSlider.Value;
+            currentMasterVolumeContentLabel.Content = m_Options.MasterVolume.ToString("+0.#;-#.#");
+            if (m_Options.MasterVolume <= 0)
+            {
+                currentMasterVolumeContentLabel.Foreground = Brushes.Green;
+            }
+            else if (m_Options.MasterVolume <= 6)
+            {
+                currentMasterVolumeContentLabel.Foreground = Brushes.Orange;
+            }
+            else
+            {
+                currentMasterVolumeContentLabel.Foreground = Brushes.Red;
+            }
+
+            m_TeamSpeakConnection.VolumeModifier = (float)m_Options.MasterVolume;
         }
     }
 }

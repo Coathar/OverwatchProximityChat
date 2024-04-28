@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="NetCoreServer" Version="8.0.7" />
+    <PackageReference Include="TeamSpeak3QueryApi" Version="1.13.0" />
   </ItemGroup>
 
   <ItemGroup>

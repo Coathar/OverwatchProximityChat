@@ -1,5 +1,4 @@
 ﻿using OverwatchProximityChat.Shared;
-using OverwatchProximityChat.Shared;
 using OverwatchProximityChat.Parser.WebSocket;
 using System.Diagnostics;
 using System.Numerics;
@@ -124,7 +123,6 @@ namespace OverwatchProximityChat.Parser
 
             string[] lineValues = line.Split("|");
 
-            // Console.WriteLine(line);
             string commandType = lineValues[0];
             string data = lineValues.Length > 1 ? lineValues[1] : string.Empty;
 
@@ -249,11 +247,14 @@ namespace OverwatchProximityChat.Parser
             PlayerRemove parsedData = JsonSerializer.Deserialize<PlayerRemove>(data, m_SerializerOptions);
 
             Player? player = Game.Players.FirstOrDefault(x => x.Slot == parsedData.Slot);
-            player?.WebSocketSession?.Disconnect();
+            player?.WebSocketSession?.Send(JsonSerializer.Serialize(new WebSocketPacket()
+            {
+                MessageType = MessageType.Disconnect
+            }));
 
             Game.Players.Remove(player);
 
-            Console.WriteLine($"{player.OverwatchName} removed.");
+            Console.WriteLine($"{player?.OverwatchName} removed.");
         }
 
         /// <summary>
@@ -309,16 +310,23 @@ namespace OverwatchProximityChat.Parser
             foreach (string playerEntry in playerEntries)
             {
                 string[] playerData = playerEntry.Split("@");
+                Console.WriteLine(data);
+                try
+                {
+                    int slot = int.Parse(playerData[0]);
+                    Vector3 position = VectorFromString(playerData[1].TrimStart('(').TrimEnd(')'));
+                    Vector3 forward = VectorFromString(playerData[2].TrimStart('(').TrimEnd(')'));
+                    bool isAlive = bool.Parse(playerData[3]);
 
-                int slot = int.Parse(playerData[0]);
-                Vector3 position = VectorFromString(playerData[1].TrimStart('(').TrimEnd(')'));
-                Vector3 forward = VectorFromString(playerData[2].TrimStart('(').TrimEnd(')'));
-                bool isAlive = bool.Parse(playerData[3]);
-
-                Player player = Game.Players.Where(x => x.Slot == slot).First();
-                player.Position = position;
-                player.Forward = forward;
-                player.IsAlive = isAlive;
+                    Player player = Game.Players.Where(x => x.Slot == slot).First();
+                    player.Position = position;
+                    player.Forward = forward;
+                    player.IsAlive = isAlive;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine(playerEntry);
+                }
             }
 
             // Generate listener/speaker data
@@ -478,7 +486,5 @@ namespace OverwatchProximityChat.Parser
 
             return s_Instance;
         }
-
-      
     }
 }

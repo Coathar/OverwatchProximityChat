@@ -30,6 +30,8 @@ namespace OverwatchProximityChat.Client
         public KeyModifier DeafenHotkeyModifier { get; set; } = KeyModifier.None;
 
         public List<UserOption> UserOptions { get; set; } = new List<UserOption>();
+
+        public double MasterVolume { get; set; }
     }
 
     public class UserOption

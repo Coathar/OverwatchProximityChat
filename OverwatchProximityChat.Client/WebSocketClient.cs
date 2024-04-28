@@ -56,7 +56,11 @@ namespace OverwatchProximityChat.Client
         {
             string message = Encoding.UTF8.GetString(buffer, (int)offset, (int)size);
 
-            Console.WriteLine(message);
+            // Ignore empty messages
+            if (string.IsNullOrEmpty(message))
+            {
+                return;
+            }
 
             string[] packets = message.Split("ç");
 
@@ -65,24 +69,33 @@ namespace OverwatchProximityChat.Client
                 if (string.IsNullOrEmpty(packetMessage))
                 {
                     continue;
-                }    
+                }
 
-                WebSocketPacket? packet = JsonSerializer.Deserialize<WebSocketPacket>(packetMessage, new JsonSerializerOptions()
+                try
                 {
-                    Converters = { new BoolConverter(), new Vector3Converter() }
-                });
+                    WebSocketPacket? packet = JsonSerializer.Deserialize<WebSocketPacket>(packetMessage, new JsonSerializerOptions()
+                    {
+                        Converters = { new BoolConverter(), new Vector3Converter() }
+                    });
 
-                switch (packet.MessageType)
+                    switch (packet.MessageType)
+                    {
+                        case MessageType.Response:
+                            Console.WriteLine(message);
+                            HandleResponse(JsonSerializer.Deserialize<Response>(packetMessage, m_SerializerOptions));
+                            break;
+                        case MessageType.VoiceData:
+                            m_MainWindow.HandleVoiceData(JsonSerializer.Deserialize<VoiceData>(packetMessage, m_SerializerOptions));
+                            break;
+                        case MessageType.Disconnect:
+                            Console.WriteLine(message);
+                            m_MainWindow.Disconnect();
+                            break;
+                    }
+                }
+                catch (JsonException)
                 {
-                    case MessageType.Response:
-                        HandleResponse(JsonSerializer.Deserialize<Response>(packetMessage, m_SerializerOptions));
-                        break;
-                    case MessageType.VoiceData:
-                        m_MainWindow.HandleVoiceData(JsonSerializer.Deserialize<VoiceData>(packetMessage, m_SerializerOptions));
-                        break;
-                    case MessageType.Disconnect:
-                        m_MainWindow.Disconnect();
-                        break;
+                    Console.WriteLine(message);
                 }
             }
         }
