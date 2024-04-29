@@ -1,4 +1,5 @@
-﻿using OverwatchProximityChat.Shared;
+﻿using Microsoft.AspNetCore.SignalR;
+using OverwatchProximityChat.Shared;
 using System.Diagnostics;
 using System.Numerics;
 using System.Text.Json;
@@ -11,20 +12,22 @@ namespace OverwatchProximityChat.API
     {
         private readonly VicreoManager m_VicreoManager;
         private readonly ILogger<WorkshopLogReader> m_Logger;
+        private readonly IHubContext<GameHub> m_GameHub;
 
         private Stopwatch m_Stopwatch;
         private JsonSerializerOptions m_SerializerOptions;
         private DateTime m_StartTime;
         private int m_LinesRead = 0;
-        public Game? Game { get; set; }
+        private Game? Game { get; set; }
 
         public bool IsRunning { get; private set; }
 
 
-        public WorkshopLogReader(VicreoManager vicreoManager, ILogger<WorkshopLogReader> logger)
+        public WorkshopLogReader(VicreoManager vicreoManager, ILogger<WorkshopLogReader> logger, IHubContext<GameHub> gameHub)
         {
             m_VicreoManager = vicreoManager;
             m_Logger = logger;
+            m_GameHub = gameHub;
 
             m_Stopwatch = new Stopwatch();
             m_SerializerOptions = new JsonSerializerOptions()
@@ -55,21 +58,6 @@ namespace OverwatchProximityChat.API
                     {
                         m_Stopwatch.Restart();
 
-                        if (Game != null)
-                        {
-                            foreach (Player player in Game.Players)
-                            {
-                                if (player.LastQueried != null && player.LastQueried <= DateTime.Now - TimeSpan.FromSeconds(5))
-                                {
-                                    m_Logger.Log(LogLevel.Information, $"No query recently for {player.OverwatchName} ({player.Slot}), assuming they disconnected.");
-                                    m_VicreoManager.SendPress("e");
-
-                                    player.LastQueried = null;
-                                    // Auto pause?
-                                }
-                            }
-                        }
-
                         TryParse();
                     }
                 }
@@ -79,6 +67,35 @@ namespace OverwatchProximityChat.API
         public async Task StopAsync(CancellationToken cancellationToken)
         {
             
+        }
+
+        public bool TryConnectPlayer(string linkCode, string connectionID)
+        {
+            Player player = Game?.Players.FirstOrDefault(x => string.Equals(linkCode, x.LinkCode));
+
+            if (player != null)
+            {
+                player.ConnectionID = connectionID;
+                m_VicreoManager.SendPress("q");
+                m_Logger.Log(LogLevel.Information, $"Client {player.ConnectionID} connected ({player.OverwatchName} #{player.Slot})");
+                return true;
+            }
+
+            return false;
+        }
+
+        public void PlayerDisconnect(string connectionID)
+        {
+            Player player = Game?.Players.FirstOrDefault(x => string.Equals(connectionID, x.ConnectionID));
+
+            if (player != null)
+            {
+                player.ConnectionID = string.Empty;
+                m_VicreoManager.SendPress("e");
+                m_Logger.Log(LogLevel.Information, $"Client {player.ConnectionID} disconnected ({player.OverwatchName} #{player.Slot})");
+
+                // Pause if game is running?
+            }
         }
 
         private void TryParse()
@@ -276,27 +293,23 @@ namespace OverwatchProximityChat.API
                     m_Logger.Log(LogLevel.Error, $"Error parsing position data:{playerEntry}\n\n\n Whole line is: {data}");
                 }
             }
-        }
 
-        public Player? TryGetPlayer(string linkCode)
-        {
-            Player? player = Game?.Players.FirstOrDefault(x => string.Equals(x.LinkCode, linkCode));
-
-            if (player == null)
+            foreach (Player player in Game.Players)
             {
-                return player;
+                if (string.IsNullOrEmpty(player.ConnectionID))
+                {
+                    continue;
+                }
+
+                m_GameHub.Clients.Client(player.ConnectionID).SendAsync("PositionUpdate", JsonSerializer.Serialize(new VoiceData()
+                {
+                    Position = player.Position,
+                    Forward = player.Forward
+                }, new JsonSerializerOptions()
+                {
+                    Converters = { new Vector3Converter() }
+                }));
             }
-
-            // New connection established
-            if (player.LastQueried == null)
-            {
-                m_VicreoManager.SendPress("q");
-                m_Logger.Log(LogLevel.Information, $"New query for {player.OverwatchName} ({player.Slot}).");
-            }
-
-            player.LastQueried = DateTime.Now;
-
-            return player;
         }
 
         private Vector3 VectorFromString(string vector)

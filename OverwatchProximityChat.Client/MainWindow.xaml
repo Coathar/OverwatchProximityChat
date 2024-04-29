@@ -5,14 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OverwatchProximityChat.Client"
         mc:Ignorable="d"
-        Title="Overwatch Proximity Chat Client" Height="258" Width="233" Closing="Window_Closing">
+        Title="Overwatch Proximity Chat Client" Height="151" Width="197" Closing="Window_Closing">
     <Grid>
         <Label x:Name="linkCodeLabel" Content="Link Code:" HorizontalAlignment="Left" Margin="32,24,0,0" VerticalAlignment="Top" Height="26" Width="64"/>
         <TextBox x:Name="linkCodeTextBox" HorizontalAlignment="Left" Margin="32,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="18" CharacterCasing="Upper"/>
-        <Button x:Name="connectButton" Content="Connect" HorizontalAlignment="Left" Margin="32,78,0,0" VerticalAlignment="Top" Click="connectButton_Click" Height="20" Width="120"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="32,131,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Margin="32,154,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Margin="32,177,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="64,212,0,0" VerticalAlignment="Top" Click="button_Click"/>
+        <Button x:Name="connectButton" Content="Connect" HorizontalAlignment="Left" Margin="32,92,0,0" VerticalAlignment="Top" Click="connectButton_Click" Height="20" Width="120"/>
     </Grid>
 </Window>

@@ -2,8 +2,6 @@
 {
     public class Options
     {
-        public string WebSocketServerAddress { get; set; } = "127.0.0.1";
-        public int WebSocketServerPort { get; set; } = 25564;
-
+        public string SignalRAddress { get; set; } = "127.0.0.1";
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.Logging;
 using OverwatchProximityChat.Client.MumbleLinkSharp;
 using OverwatchProximityChat.Shared;
 using System.IO;
@@ -19,25 +20,26 @@ namespace OverwatchProximityChat.Client
         private Options m_Options;
         private MumbleLinkFile m_MumbleLink;
         private LinkedMem m_LinkedMemory;
+        private HubConnection m_HubConnection;
 
         public MainWindow(ILoggerFactory loggerFactory)
         {
             InitializeComponent();
-           
-           
+
             m_Options = new Options();
             if (File.Exists("options.json"))
             {
                 m_Options = JsonSerializer.Deserialize<Options>(File.ReadAllText("options.json"));
             }
 
-            if (!IPAddress.TryParse(m_Options.WebSocketServerAddress, out IPAddress ipAddress))
-            {
-                ipAddress = Dns.GetHostEntry(m_Options.WebSocketServerAddress).AddressList[0];
-            }
+            m_HubConnection = new HubConnectionBuilder().WithUrl($"{m_Options.SignalRAddress}/Game")
+                .WithAutomaticReconnect()
+                .Build();
+
+            m_HubConnection.On<string>("PositionUpdate", PositionUpdate);
         }
 
-        private void connectButton_Click(object sender, RoutedEventArgs e)
+        private async void connectButton_Click(object sender, RoutedEventArgs e)
         {
             m_MumbleLink = new MumbleLinkFile();
 
@@ -50,57 +52,57 @@ namespace OverwatchProximityChat.Client
             m_LinkedMemory.name = "Overwatch";
             m_LinkedMemory.description = "Overwatch Proximity Chat";
             m_LinkedMemory.uiVersion = 2;
-        }
 
-        public LinkPlayer GetLinkPlayerData()
-        {
-            return new LinkPlayer()
+            if (m_HubConnection.State == HubConnectionState.Disconnected)
             {
-                LinkCode = linkCodeTextBox.Text
-            };
-        }
+                await m_HubConnection.StartAsync();
 
-        public void WebSocketDisconnectError()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                connectButton.Content = "Connect";
-                MessageBox.Show("Failed to connect to Web Socket Server", "Error", MessageBoxButton.OK);
-            });
-        }
+                bool result = await m_HubConnection.InvokeAsync<bool>("LinkCode", linkCodeTextBox.Text);
 
-        public void LinkResponse(Response responsePacket)
-        {
-            /*if (responsePacket.Success)
-            {
-                m_TeamSpeakConnection.Self.MoveTo(m_TeamSpeakConnection.Channels.Where(x => !x.IsDefault).First());
-                m_TeamSpeakConnection.Self.InputMuted = m_Spectating;
-                m_TeamSpeakConnection.Self.OutputMuted = false;
-
-                this.Dispatcher.Invoke(() =>
+                if (result)
                 {
                     connectButton.Content = "Disconnect";
-                    muteButton.IsEnabled = !m_Spectating;
-                });
-
-                ClientUpdated(m_TeamSpeakConnection.Self);
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Link Code", "Error", MessageBoxButton.OK);
+                    Disconnect();
+                }
             }
             else
             {
-                this.Dispatcher.Invoke(() =>
-                {
-                    MessageBox.Show("Invalid Link Code", "Error", MessageBoxButton.OK);
-                });
-                this.Disconnect();
-            }*/
+                Disconnect();
+            }
         }
 
-        public void Disconnect()
+        private void PositionUpdate(string message)
+        {
+            VoiceData? voiceData = JsonSerializer.Deserialize<VoiceData>(message, new JsonSerializerOptions()
+            {
+                Converters = { new Vector3Converter() }
+            });
+
+            if (voiceData != null)
+            {
+                m_LinkedMemory.uiTick++;
+                m_LinkedMemory.fAvatarPosition = [voiceData.Position.X, voiceData.Position.Y, voiceData.Position.Z];
+                m_LinkedMemory.fCameraPosition = [voiceData.Position.X, voiceData.Position.Y, voiceData.Position.Z];
+
+                m_LinkedMemory.fAvatarFront = [voiceData.Forward.X, voiceData.Forward.Y, voiceData.Forward.Z];
+                m_LinkedMemory.fCameraFront = [voiceData.Forward.X, voiceData.Forward.Y, voiceData.Forward.Z];
+
+                m_MumbleLink.Write(m_LinkedMemory);
+            }
+        }
+
+        public async void Disconnect()
         {
             this.Dispatcher.Invoke(() =>
             {
                 connectButton.Content = "Connect";
             });
+
+            await m_HubConnection.StopAsync();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -108,19 +110,6 @@ namespace OverwatchProximityChat.Client
             this.Disconnect();           
 
             File.WriteAllText("options.json", JsonSerializer.Serialize(m_Options));
-        }
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            m_LinkedMemory.uiTick++;
-            m_LinkedMemory.fAvatarPosition = [float.Parse(textBox.Text), float.Parse(textBox_Copy.Text), float.Parse(textBox_Copy1.Text)];
-            m_LinkedMemory.fCameraPosition = [float.Parse(textBox.Text), float.Parse(textBox_Copy.Text), float.Parse(textBox_Copy1.Text)];
-            m_LinkedMemory.fAvatarTop = [0, 1, 0];
-            m_LinkedMemory.fCameraTop = [0, 1, 0];
-            m_LinkedMemory.fAvatarFront = [0, 0, 1];
-            m_LinkedMemory.fCameraFront = [0, 0, 1];
-
-            m_MumbleLink.Write(m_LinkedMemory);
         }
     }
 }

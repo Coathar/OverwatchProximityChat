@@ -29,24 +29,11 @@ namespace OverwatchProximityChat.API
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
-            app.MapGet("/get-player/{linkCode}",
-                (string linkCode, HttpContext httpContext,
-                [FromServices]WorkshopLogReader workshopParser) =>
-            {
-                Models.Player? player = workshopParser.TryGetPlayer(linkCode);
-                if (player == null)
-                {
-                    return Results.NotFound("Player not found");
-                }
-
-                return Results.Json(player);
-            })
-            .WithName("GetPlayer")
-            .WithOpenApi();
+            app.MapHub<GameHub>("/Game");
 
             app.Run();
 

@@ -62,8 +62,7 @@ namespace OverwatchProximityChat.API
 
             public string? LinkCode { get; set; }
 
-            [JsonIgnore]
-            public DateTime? LastQueried { get; set; }
+            public string? ConnectionID { get; set; }
         }
 
         public enum GameStatus
