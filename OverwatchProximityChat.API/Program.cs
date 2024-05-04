@@ -12,9 +12,11 @@ namespace OverwatchProximityChat.API
 
             // Add services to the container.
             builder.Services.AddAuthorization();
+            builder.Services.AddSignalR();
             builder.Services.AddSingleton<WorkshopLogReader>();
             builder.Services.AddHostedService(provider => provider.GetService<WorkshopLogReader>());
             builder.Services.AddSingleton<VicreoManager>();
+            builder.Services.AddHostedService<MumbleIce>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

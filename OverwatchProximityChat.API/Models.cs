@@ -12,24 +12,20 @@ namespace OverwatchProximityChat.API
             public string? MapName { get; set; }
         }
 
-        public class PlayerCreate
+        public class PlayerCreate : PlayerEvent
         {
-            public int Slot { get; set; }
-
             public string? Name { get; set; }
 
             public string? LinkCode { get; set; }
         }
 
-        public class PlayerRemove
+        public class PlayerEvent
         {
             public int Slot { get; set; }
         }
 
-        public class PlayerPositionData
+        public class PlayerPositionData : PlayerEvent
         {
-            public int Slot { get; set; }
-
             public Vector3 Position { get; set; }
 
             public Vector3 Forward { get; set; }
@@ -58,8 +54,6 @@ namespace OverwatchProximityChat.API
 
             public Vector3 Forward { get; set; }
 
-            public bool IsAlive { get; set; }
-
             public string? LinkCode { get; set; }
 
             public string? ConnectionID { get; set; }
@@ -71,6 +65,11 @@ namespace OverwatchProximityChat.API
             IN_PROGRESS,
             PAUSED,
             COMPLETED
+        }
+
+        public class PlayerEventArgs : EventArgs
+        {
+            public Player? Player { get; set; }
         }
     }
 }

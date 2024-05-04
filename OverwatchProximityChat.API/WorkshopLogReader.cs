@@ -22,6 +22,8 @@ namespace OverwatchProximityChat.API
 
         public bool IsRunning { get; private set; }
 
+        public event EventHandler OnPlayerDeath;
+        public event EventHandler OnPlayerSpawn;
 
         public WorkshopLogReader(VicreoManager vicreoManager, ILogger<WorkshopLogReader> logger, IHubContext<GameHub> gameHub)
         {
@@ -184,9 +186,55 @@ namespace OverwatchProximityChat.API
                 case "pos":
                     PositionData(data);
                     break;
+                case "player-died":
+                    PlayerDie(data);
+                    break;
+                case "player-spawn":
+                    PlayerSpawn(data);
+                    break;
                 case "start-round":
                     Game.GameStatus = GameStatus.IN_PROGRESS;
                     break;
+            }
+        }
+
+        /// <summary>
+        /// On player die
+        /// </summary>
+        private void PlayerDie(string data)
+        {
+            if (string.IsNullOrEmpty(data))
+            {
+                throw new ArgumentException("No player data found");
+            }
+
+            PlayerEvent parsedData = JsonSerializer.Deserialize<PlayerEvent>(data, m_SerializerOptions);
+
+            Player existingPlayer = Game.Players.Where(x => x.Slot == parsedData.Slot).FirstOrDefault();
+
+            if (existingPlayer != null)
+            {
+                OnPlayerDeath.Invoke(this, new PlayerEventArgs() { Player = existingPlayer });
+            }
+        }
+
+        /// <summary>
+        /// On player spawn
+        /// </summary>
+        private void PlayerSpawn(string data)
+        {
+            if (string.IsNullOrEmpty(data))
+            {
+                throw new ArgumentException("No player data found");
+            }
+
+            PlayerEvent parsedData = JsonSerializer.Deserialize<PlayerEvent>(data, m_SerializerOptions);
+
+            Player existingPlayer = Game.Players.Where(x => x.Slot == parsedData.Slot).FirstOrDefault();
+
+            if (existingPlayer != null)
+            {
+                OnPlayerSpawn.Invoke(this, new PlayerEventArgs() { Player = existingPlayer });
             }
         }
 
@@ -251,7 +299,7 @@ namespace OverwatchProximityChat.API
                 throw new ArgumentException("No remove player data found");
             }
 
-            PlayerRemove parsedData = JsonSerializer.Deserialize<PlayerRemove>(data, m_SerializerOptions);
+            PlayerEvent parsedData = JsonSerializer.Deserialize<PlayerEvent>(data, m_SerializerOptions);
 
             Player? player = Game.Players.FirstOrDefault(x => x.Slot == parsedData.Slot);
 
@@ -281,12 +329,10 @@ namespace OverwatchProximityChat.API
                     int slot = int.Parse(playerData[0]);
                     Vector3 position = VectorFromString(playerData[1].TrimStart('(').TrimEnd(')'));
                     Vector3 forward = VectorFromString(playerData[2].TrimStart('(').TrimEnd(')'));
-                    bool isAlive = bool.Parse(playerData[3]);
 
                     Player player = Game.Players.Where(x => x.Slot == slot).First();
                     player.Position = position;
                     player.Forward = forward;
-                    player.IsAlive = isAlive;
                 }
                 catch (FormatException)
                 {
