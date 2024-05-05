@@ -37,6 +37,7 @@ namespace OverwatchProximityChat.Client
                 .Build();
 
             m_HubConnection.On<string>("PositionUpdate", PositionUpdate);
+            m_HubConnection.On("Disconnect", Disconnect);
         }
 
         private async void connectButton_Click(object sender, RoutedEventArgs e)
@@ -44,7 +45,7 @@ namespace OverwatchProximityChat.Client
             m_MumbleLink = new MumbleLinkFile();
 
             m_LinkedMemory.context = new byte[256];
-            Array.Copy(Encoding.UTF8.GetBytes("test"), m_LinkedMemory.context, 4);
+            Array.Copy(Encoding.UTF8.GetBytes("Game"), m_LinkedMemory.context, 4);
             m_LinkedMemory.context_len = 4;
 
             m_LinkedMemory.identity = linkCodeTextBox.Text;

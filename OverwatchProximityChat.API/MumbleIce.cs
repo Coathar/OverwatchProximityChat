@@ -34,10 +34,15 @@ namespace OverwatchProximityChat.API
 
             if (m_PrimaryServer != null)
             {
-                User? foundUser = m_PrimaryServer.getUsers().Values.FirstOrDefault(x => string.Equals(x.identity, playerEvent.Player.LinkCode));
-                if (foundUser != null)
+                foreach (int userID in m_PrimaryServer.getUsers().Keys)
                 {
-                    foundUser.mute = true;
+                    User user = m_PrimaryServer.getState(userID);
+
+                    if (string.Equals(user.identity, playerEvent.Player.LinkCode))
+                    {
+                        user.mute = true;
+                        m_PrimaryServer.setState(user);
+                    }
                 }
             }
         }
@@ -51,10 +56,15 @@ namespace OverwatchProximityChat.API
 
             if (m_PrimaryServer != null)
             {
-                User? foundUser = m_PrimaryServer.getUsers().Values.FirstOrDefault(x => string.Equals(x.identity, playerEvent.Player.LinkCode));
-                if (foundUser != null)
+                foreach (int userID in m_PrimaryServer.getUsers().Keys)
                 {
-                    foundUser.mute = false;
+                    User user = m_PrimaryServer.getState(userID);
+
+                    if (string.Equals(user.identity, playerEvent.Player.LinkCode))
+                    {
+                        user.mute = false;
+                        m_PrimaryServer.setState(user);
+                    }
                 }
             }
         }
@@ -63,11 +73,11 @@ namespace OverwatchProximityChat.API
         {
             await Task.Run(() =>
             {
-                Communicator communicator = Util.initialize();
-                ObjectPrx obj = communicator.stringToProxy("Meta:tcp -h 192.168.0.52 -p 6502");
+                m_Communicator = Util.initialize();
+                ObjectPrx obj = m_Communicator.stringToProxy("Meta:tcp -h 192.168.0.52 -p 6502");
                 MetaPrx serverProxy = MetaPrxHelper.checkedCast(obj);
-                ServerPrx primaryServer = serverProxy.getAllServers().First();
-                Dictionary<int, Channel> existingChannels = primaryServer.getChannels();
+                m_PrimaryServer = serverProxy.getAllServers().First();
+                Dictionary<int, Channel> existingChannels = m_PrimaryServer.getChannels();
                 foreach (KeyValuePair<int, Channel> channelPair in existingChannels)
                 {
                     switch (channelPair.Value.name.ToLower())
@@ -89,7 +99,7 @@ namespace OverwatchProximityChat.API
 
                 if (m_RootOverwatchChannel == null)
                 {
-                    m_RootOverwatchChannel = primaryServer.addChannel("Overwatch", 0);
+                    m_RootOverwatchChannel = m_PrimaryServer.addChannel("Overwatch", 0);
                 }
 
                 // TODO make a way to still have split teams? 

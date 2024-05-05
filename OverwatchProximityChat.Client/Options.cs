@@ -2,6 +2,6 @@
 {
     public class Options
     {
-        public string SignalRAddress { get; set; } = "127.0.0.1";
+        public string SignalRAddress { get; set; } = "http://localhost:25564";
     }
 }

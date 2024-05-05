@@ -8,15 +8,31 @@ namespace OverwatchProximityChat.API
     {
         private TcpClient m_Client;
         private StreamWriter m_Stream;
+        private ILogger<VicreoManager> m_Logger;
 
-        public VicreoManager()
+        public VicreoManager(ILogger<VicreoManager> logger)
         {
-            m_Client = new TcpClient("127.0.0.1", 10001);
-            m_Stream = new StreamWriter(m_Client.GetStream());
+            m_Logger = logger;
+
+            try
+            {
+                m_Client = new TcpClient("127.0.0.1", 10001);
+                m_Stream = new StreamWriter(m_Client.GetStream());
+            }
+            catch
+            {
+                m_Logger.Log(LogLevel.Warning, "Unable to connect to Vicreo!");
+            }
+            
         }
 
         public void SendPress(string key)
         {
+            if (m_Stream == null)
+            {
+                return;
+            }
+
             VicreoPacket packet = new VicreoPacket()
             {
                 type = "press",
@@ -29,6 +45,11 @@ namespace OverwatchProximityChat.API
 
         public void SendCombo(string key, string[] combo)
         {
+            if (m_Stream == null)
+            {
+                return;
+            }
+
             VicreoPacket packet = new VicreoPacket()
             {
                 type = "combination",
@@ -42,7 +63,7 @@ namespace OverwatchProximityChat.API
 
         public void Dispose()
         {
-            m_Client.Dispose();
+            m_Client?.Dispose();
         }
 
         private struct VicreoPacket

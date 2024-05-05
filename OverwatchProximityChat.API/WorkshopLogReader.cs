@@ -250,6 +250,8 @@ namespace OverwatchProximityChat.API
 
             StartPacket parsedData = JsonSerializer.Deserialize<StartPacket>(data, m_SerializerOptions);
 
+            m_GameHub.Clients.All.SendAsync("Disconnect");
+
             Game = new Game()
             {
                 GameID = parsedData.GameID,
