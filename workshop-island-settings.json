@@ -1,0 +1,14 @@
+{
+    "Modes": {
+        "All": {
+            "Limit Roles": "1 Tank 2 Offense 2 Support",
+            "Game Mode Start": "Immediately",
+            "Kill Cam": "Off",
+            "Tank Role Passive Health Bonus": "Always Enabled"
+        },
+        "Skirmish": {
+            "Enabled": true,
+            "Enabled Maps": [ "Workshop Island" ]
+        }
+    }
+}
