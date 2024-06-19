@@ -5,70 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OverwatchProximityChat.Client"
         mc:Ignorable="d"
-        Title="Overwatch Proximity Chat Client" Height="450" Width="800" Closing="Window_Closing">
+        Title="Overwatch Proximity Chat Client" Height="151" Width="197" Closing="Window_Closing">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="300*"/>
-        </Grid.ColumnDefinitions>
-
-        <Label x:Name="teamSpeakServerNicknameLabel" Content="Display Name:" HorizontalAlignment="Left" Margin="30,21,0,0" VerticalAlignment="Top" Height="26" Width="85" Grid.Column="0"/>
-        <TextBox x:Name="teamSpeakServerNicknameTextBox" HorizontalAlignment="Left" Margin="30,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="0" TextChanged="teamSpeakServerNicknameTextBox_TextChanged"/>
-
-        <Label x:Name="linkCodeLabel" Content="Link Code:" HorizontalAlignment="Left" Margin="29,21,0,0" VerticalAlignment="Top" Height="26" Width="65" Grid.Column="1"/>
-        <TextBox x:Name="linkCodeTextBox" HorizontalAlignment="Left" Margin="30,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1" CharacterCasing="Upper"/>
-
-        <Button x:Name="muteButton" Content="Mute" HorizontalAlignment="Left" Margin="30,75,0,0" VerticalAlignment="Top" Click="muteButton_Click" Height="20" Width="55" Grid.Column="0"/>
-        <Button x:Name="deafenButton" Content="Deafen" HorizontalAlignment="Left" Margin="95,75,0,0" VerticalAlignment="Top" Click="deafenButton_Click" Height="20" Width="55" Grid.Column="0"/>
-        <Button x:Name="connectButton" Content="Connect" HorizontalAlignment="Left" Margin="30,75,0,0" VerticalAlignment="Top" Click="connectButton_Click" Height="20" Width="120" Grid.Column="1"/>
-
-        <ListBox x:Name="userListBox" Margin="25,35,25,35" Grid.Column="3" >
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" >
-                        <Image Margin="3" Source="{Binding StatusIcon}" MaxHeight="16" MaxWidth="16"/>
-                        <TextBlock Margin="3" Text="{Binding User}" MouseDown="userListBox_MouseClick"/>
-                        <TextBlock Margin="3" Text="- Spectating" Visibility="{Binding SpectatorTextVisibility}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-
-        <Label x:Name="muteHotkeyLabel" Content="Mute Hotkey" HorizontalAlignment="Left" Margin="20,166,0,0" VerticalAlignment="Top" Height="26" Width="80" Visibility="Hidden"/>
-        <Label x:Name="deafenHotkeyLabel" Content="Deafen Hotkey" HorizontalAlignment="Left" Margin="20,166,0,0" VerticalAlignment="Top" Height="26" Width="89" Grid.Column="1" Visibility="Hidden"/>
-
-        <Button x:Name="muteHotkeyButton" Content="" HorizontalAlignment="Left" Margin="20,197,0,0" VerticalAlignment="Top" Width="158" Height="20" Click="muteHotkeyButton_Click" BorderBrush="#FF707070" Background="#FFDDDDDD" Visibility="Hidden"/>
-        <Button x:Name="deafenHotkeyButton" Content="" HorizontalAlignment="Left" Margin="20,197,0,0" VerticalAlignment="Top" Width="158" Height="20" Grid.Column="1" Click="deafenHotkeyButton_Click" Visibility="Hidden"/>
-
-        <CheckBox x:Name="muteHotkeyShiftCheckbox" Content="Shift" HorizontalAlignment="Left" Margin="20,222,0,0" VerticalAlignment="Top" Height="15" Width="45" Checked="hotkeyModifier_CheckedToggle" Unchecked="hotkeyModifier_CheckedToggle" Visibility="Hidden"/>
-        <CheckBox x:Name="muteHotkeyAltCheckbox" Content="Alt" HorizontalAlignment="Left" Margin="80,222,0,0" VerticalAlignment="Top" Height="15" Width="45" Checked="hotkeyModifier_CheckedToggle" Unchecked="hotkeyModifier_CheckedToggle" Visibility="Hidden"/>
-        <CheckBox x:Name="muteHotkeyControlCheckbox" Content="Ctrl" HorizontalAlignment="Left" Margin="130,222,0,0" VerticalAlignment="Top" Height="15" Width="45" Checked="hotkeyModifier_CheckedToggle" Unchecked="hotkeyModifier_CheckedToggle" Visibility="Hidden"/>
-
-        <CheckBox x:Name="deafenHotkeyShiftCheckbox" Content="Shift" HorizontalAlignment="Left" Margin="20,222,0,0" VerticalAlignment="Top" Height="15" Width="44" Grid.Column="1" Checked="hotkeyModifier_CheckedToggle" Unchecked="hotkeyModifier_CheckedToggle" Visibility="Hidden"/>
-        <CheckBox x:Name="deafenHotkeyAltCheckbox" Content="Alt" HorizontalAlignment="Left"  Margin="80,222,0,0" VerticalAlignment="Top" Height="15" Width="35" Grid.Column="1" Checked="hotkeyModifier_CheckedToggle" Unchecked="hotkeyModifier_CheckedToggle" Visibility="Hidden"/>
-        <CheckBox x:Name="deafenHotkeyControlCheckbox" Content="Ctrl" HorizontalAlignment="Left" Margin="130,222,0,0" VerticalAlignment="Top" Height="15" Width="59" Grid.Column="1" Checked="hotkeyModifier_CheckedToggle" Unchecked="hotkeyModifier_CheckedToggle" Visibility="Hidden"/>
-
-        <Label x:Name="inputDeviceLabel" Content="Input Device:" HorizontalAlignment="Left" Margin="20,270,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="outputDeviceLabel" Content="Output Device:" HorizontalAlignment="Left" Margin="20,270,0,0" VerticalAlignment="Top" Grid.Column="1" Visibility="Hidden"/>
-
-        <ComboBox x:Name="inputDeviceSelectorComboBox" HorizontalAlignment="Left" Margin="20,300,0,0" VerticalAlignment="Top" Width="158" Height="22" SelectionChanged="inputDeviceSelectorComboBox_SelectionChanged">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-
-        <ComboBox x:Name="outputDeviceSelectorComboBox" HorizontalAlignment="Left" Margin="20,300,0,0" IsEnabled="false" VerticalAlignment="Top" Width="158" Height="22" Grid.Column="1" SelectionChanged="outputDeviceSelectorComboBox_SelectionChanged" Visibility="Hidden">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <Slider x:Name="masterVolumeSlider" HorizontalAlignment="Left" Margin="29,381,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Maximum="20" Minimum="-30" ValueChanged="masterVolumeSlider_ValueChanged" SmallChange="0.5" LargeChange="0.5"/>
-        <Label x:Name="masterVolumeLabel" Grid.Column="1" Content="Master Volume:" HorizontalAlignment="Left" Margin="30,350,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="currentMasterVolumeContentLabel" Content="+0.0 db" HorizontalAlignment="Right" Margin="0,350,26,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label x:Name="linkCodeLabel" Content="Link Code:" HorizontalAlignment="Left" Margin="32,24,0,0" VerticalAlignment="Top" Height="26" Width="64"/>
+        <TextBox x:Name="linkCodeTextBox" HorizontalAlignment="Left" Margin="32,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="18" CharacterCasing="Upper"/>
+        <Button x:Name="connectButton" Content="Connect" HorizontalAlignment="Left" Margin="32,92,0,0" VerticalAlignment="Top" Click="connectButton_Click" Height="20" Width="120"/>
     </Grid>
 </Window>
